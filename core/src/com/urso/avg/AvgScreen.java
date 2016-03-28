@@ -11,9 +11,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -28,6 +30,17 @@ public class AvgScreen implements Screen {
 	
 	private Array<Sprite> spArr;
 	private String picPath;
+	
+	// crosefade test
+	private enum GalleryState{
+		PICTURE,
+		TRANSITIONING
+	}
+	private FrameBuffer curFrameBuffer;
+	private FrameBuffer nextFrameBuffer;
+	private GalleryState state;
+	private GalleryState nextState;
+	private float time;
 	
 	public AvgScreen(UrsoAvgGame game){
 		this.game = game;
@@ -51,10 +64,18 @@ public class AvgScreen implements Screen {
 		Sprite spAsura = monAtlas.createSprite("Asura");
 		Sprite spPriest = monAtlas.createSprite("Priest");
 		Sprite spCockatrice = monAtlas.createSprite("Cockatrice");
-		spPriest.setPosition(500, 300);
+		spPriest.setPosition(0, 0);
 		spArr.add(spAsura);
 		spArr.add(spPriest);
 		spArr.add(spCockatrice);
+		
+		// crossfade test
+		curFrameBuffer = new FrameBuffer(Format.RGBA8888, UrsoAvgGame.SCW, UrsoAvgGame.SCH, false);
+		nextFrameBuffer = new FrameBuffer(Format.RGBA8888, UrsoAvgGame.SCW, UrsoAvgGame.SCH, false);
+		time = 0;
+		state = GalleryState.PICTURE;	
+		nextState = GalleryState.PICTURE;	
+		
 	}
 	
 	
@@ -68,21 +89,88 @@ public class AvgScreen implements Screen {
 		handleInput();
 		camera.update();
 		game.batch.setProjectionMatrix(camera.combined);
+		time+=delta;
 		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		
+		switch(state){
+		case PICTURE:
+			updatePicture();
+			break;
+		case TRANSITIONING:
+			updateTrans();
+			break;
+		}
+	}
+
+	private void updateTrans() {
+		float alpha = Math.min(1f, time/2f);
+		game.batch.begin();
+		game.batch.setColor(1f, 1f, 1f, 1f-alpha);
+		game.batch.draw(curFrameBuffer.getColorBufferTexture(), 0, 0);
+		game.batch.setColor(1f, 1f, 1f, alpha);
+		game.batch.draw(nextFrameBuffer.getColorBufferTexture(), 0, 0);
+		game.batch.end();
+		if (time>=2){
+			nextState = GalleryState.PICTURE;
+			state = GalleryState.PICTURE;
+			time = 0;
+		}
+	}
+
+
+	private void updatePicture() {
 		game.batch.begin();
 		game.batch.disableBlending();
 		spArr.get(0).draw(game.batch);
 		game.batch.enableBlending();
 		spArr.get(3).draw(game.batch);
 		game.batch.end();
+		
+		if (nextState!=state){
+			state = GalleryState.TRANSITIONING;
+			time = 0;
+			spArr.get(0).flip(false, true);
+			spArr.get(3).flip(false, true);
+			
+			curFrameBuffer.bind();
+			Gdx.gl.glClearColor(0, 0, 0, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+			game.batch.begin();
+			game.batch.disableBlending();
+			spArr.get(0).draw(game.batch);
+			game.batch.enableBlending();
+			spArr.get(3).draw(game.batch);
+			game.batch.end();
+			FrameBuffer.unbind();
+			
+			spArr.get(0).flip(false, true);
+			spArr.get(3).flip(false, true);
+			spArr.get(1).flip(false, true);
+			spArr.get(4).flip(false, true);
+			
+			nextFrameBuffer.bind();
+			Gdx.gl.glClearColor(0, 0, 0, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+			game.batch.begin();
+			game.batch.disableBlending();
+			spArr.get(1).draw(game.batch);
+			game.batch.enableBlending();
+			spArr.get(4).draw(game.batch);
+			game.batch.end();
+			FrameBuffer.unbind();
+			
+			spArr.get(1).flip(false, true);
+			spArr.get(4).flip(false, true);
+		}
 	}
 
+
 	private void handleInput() {
-		// TODO Auto-generated method stub
-		
+		if (Gdx.input.isTouched()){
+			nextState = GalleryState.TRANSITIONING;
+		}
 	}
 
 
@@ -112,6 +200,8 @@ public class AvgScreen implements Screen {
 		for (Sprite sp : spArr){
 			sp.getTexture().dispose();
 		}
+		curFrameBuffer.dispose();
+		nextFrameBuffer.dispose();
 	}
 
 }
