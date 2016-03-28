@@ -8,6 +8,7 @@
 package com.urso.avg;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -41,6 +43,12 @@ public class AvgScreen implements Screen {
 	private GalleryState state;
 	private GalleryState nextState;
 	private float time;
+	
+	// shader test
+	private ShaderProgram[] shaders;
+	private String[] shaderNames;
+	private int currentShader;
+	
 	
 	public AvgScreen(UrsoAvgGame game){
 		this.game = game;
@@ -74,7 +82,22 @@ public class AvgScreen implements Screen {
 		nextFrameBuffer = new FrameBuffer(Format.RGBA8888, UrsoAvgGame.SCW, UrsoAvgGame.SCH, false);
 		time = 0;
 		state = GalleryState.PICTURE;	
-		nextState = GalleryState.PICTURE;	
+		nextState = GalleryState.PICTURE;
+		
+		// shader test
+		shaders = new ShaderProgram[4];
+		shaderNames = new String[4];
+		shaders[0] = null;
+		shaderNames[0] = "Null";
+		shaders[1] = new ShaderProgram(Gdx.files.internal("data/shaders/grayscale.vert"), 
+				Gdx.files.internal("data/shaders/grayscale.frag"));
+		shaderNames[1] = "GrayScale";
+		shaders[2] = new ShaderProgram(Gdx.files.internal("data/shaders/sepia.vert"),
+				   Gdx.files.internal("data/shaders/sepia.frag"));
+		shaderNames[2] = "Sepia";
+		shaders[3] = new ShaderProgram(Gdx.files.internal("data/shaders/inverted.vert"),
+						   Gdx.files.internal("data/shaders/inverted.frag"));
+		shaderNames[3] = "Inverted";
 		
 	}
 	
@@ -168,7 +191,14 @@ public class AvgScreen implements Screen {
 
 
 	private void handleInput() {
-		if (Gdx.input.isTouched()){
+		if (Gdx.input.isKeyJustPressed(Input.Keys.S)){
+			currentShader = (currentShader + 1) % shaders.length;
+			game.batch.setShader(shaders[currentShader]);
+			
+			Gdx.app.log("ShaderSample", "Switching to shader " + shaderNames[currentShader]);
+		}
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.C)){
 			nextState = GalleryState.TRANSITIONING;
 		}
 	}
@@ -202,6 +232,10 @@ public class AvgScreen implements Screen {
 		}
 		curFrameBuffer.dispose();
 		nextFrameBuffer.dispose();
+		
+		for (ShaderProgram s: shaders){
+			if (s!=null) s.dispose();
+		}
 	}
 
 }
