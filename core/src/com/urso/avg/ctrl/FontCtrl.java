@@ -5,20 +5,23 @@
 * @date 2016年3月26日 下午7:39:52
 * @version V1.0  
 */
-package com.urso.avg.tool;
+package com.urso.avg.ctrl;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.urso.avg.UrsoAvgGame;
 
 public class FontCtrl {
+	private UrsoAvgGame game;
 	
 	public String configPath;
 	private BitmapFont font;
 	
-	public FontCtrl(){
-		configPath = "data/config/";
+	public FontCtrl(UrsoAvgGame game, String path){
+		this.game = game;
+		configPath = path;
 	}
 	
 	public BitmapFont loadFont(String name, int size){

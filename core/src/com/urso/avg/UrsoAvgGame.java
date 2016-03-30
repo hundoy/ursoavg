@@ -9,11 +9,15 @@ package com.urso.avg;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.urso.avg.tool.FontCtrl;
+import com.urso.avg.ctrl.AssetCtrl;
+import com.urso.avg.ctrl.ErrorCtrl;
+import com.urso.avg.ctrl.FontCtrl;
 
 public class UrsoAvgGame extends Game {
 	SpriteBatch batch;
-	public FontCtrl fontCtrl;
+	public FontCtrl font;
+	public AssetCtrl asset;
+	public ErrorCtrl error;
 	
 	public static final int SCW = 1069;
 	public static final int SCH = 600;	
@@ -21,8 +25,16 @@ public class UrsoAvgGame extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		fontCtrl = new FontCtrl();
-		fontCtrl.loadFont("bgqc.TTF", 18);
+		
+		// init font control
+		font = new FontCtrl(this, "data/config/");
+		font.loadFont("bgqc.TTF", 18);
+		
+		// init asset control
+		asset = new AssetCtrl(this, "data/graphics/");
+		
+		// init error control
+		error = new ErrorCtrl(this, "");
 		
 		this.setScreen(new AvgScreen(this));
 	}
@@ -35,6 +47,8 @@ public class UrsoAvgGame extends Game {
 	@Override
 	public void dispose(){
 		batch.dispose();
-		fontCtrl.dispose();
+		font.dispose();
+		asset.dispose();
+		error.dispose();
 	}
 }
