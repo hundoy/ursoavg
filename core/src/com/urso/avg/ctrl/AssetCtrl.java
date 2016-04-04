@@ -14,14 +14,15 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.urso.avg.UrsoAvgGame;
+import com.urso.avg.bean.TexBean;
 
 import static com.urso.avg.tool.ToolUtil.*;
 
 public class AssetCtrl {
 	private UrsoAvgGame game;
 	
-	private HashMap<String, Texture> textureMap;
-	private HashMap<String, TextureAtlas> atlasMap;
+	private HashMap<String, TexBean> textureMap;
+	private HashMap<String, TexBean> atlasMap;
 	private HashMap<String, String> actualNameMap;
 	private String picPath; // this must be end with "/"
 	
@@ -29,8 +30,8 @@ public class AssetCtrl {
 		this.game = game;
 		if (!picPath.endsWith("/")) picPath += "/";
 		this.picPath = picPath;
-		textureMap = new HashMap<String, Texture>();
-		atlasMap = new HashMap<String, TextureAtlas>();
+		textureMap = new HashMap<String, TexBean>();
+		atlasMap = new HashMap<String, TexBean>();
 		
 		scanPics();
 	}
@@ -48,17 +49,18 @@ public class AssetCtrl {
 				if (actualname.indexOf(".")>-1){
 					lowname = actualname.substring(0, actualname.indexOf("."));
 				}
-				actualNameMap.put(lowname, actualname);
+				// there is no value in map
+				// or the new file is an atlas
+				// then add/change the actual file name
+				if (!actualNameMap.containsKey(lowname) || actualname.toLowerCase().endsWith(".atlas")){
+					actualNameMap.put(lowname, actualname);
+				}
 			}
 		}
 	}
-	
-	
-	
-	
 
 	// load a texture by name without extension
-	public Texture loadTexture(String name){
+	public TexBean loadTexture(String name){
 		if (!isnnb(name)) {
 			return null;
 		}
@@ -69,8 +71,11 @@ public class AssetCtrl {
 		} else if (actualNameMap.containsKey(lowname)){
 			String actualName = actualNameMap.get(lowname);
 			Texture tex = new Texture(Gdx.files.local(picPath + actualName));
-			textureMap.put(lowname, tex);
-			return tex;
+			TexBean bean = new TexBean();
+			bean.initTexture(lowname, actualName, picPath + actualName, 
+					TexBean.TYPE_TEXTURE, tex);
+			textureMap.put(lowname, bean);
+			return bean;
 		} else{
 			game.error.warnFileNotFound(lowname);
 			return null;
@@ -83,14 +88,14 @@ public class AssetCtrl {
 		
 		String lowname = name.toLowerCase();
 		if (textureMap.containsKey(lowname)){
-			Texture tex = textureMap.get(lowname);
+			TexBean tex = textureMap.get(lowname);
 			textureMap.remove(lowname);
 			tex.dispose();
 		}
 	}
 	
 	// load atlas without extension
-	public TextureAtlas loadAtlas(String name){
+	public TexBean loadAtlas(String name){
 		if (!isnnb(name)) return null;
 		
 		String lowname = name.toLowerCase();
@@ -99,8 +104,11 @@ public class AssetCtrl {
 		} else if (actualNameMap.containsKey(lowname)){
 			String actualName = actualNameMap.get(lowname);
 			TextureAtlas atlas = new TextureAtlas(picPath + actualName);
-			atlasMap.put(lowname, atlas);
-			return atlas;
+			TexBean bean = new TexBean();
+			bean.initAtlas(lowname, actualName, picPath + actualName, 
+					TexBean.TYPE_ATLAS, atlas);
+			atlasMap.put(lowname, bean);
+			return bean;
 		} else{
 			game.error.warnFileNotFound(lowname);
 			return null;
@@ -113,14 +121,14 @@ public class AssetCtrl {
 		
 		String lowname = name.toLowerCase();
 		if (atlasMap.containsKey(lowname)){
-			TextureAtlas atlas = atlasMap.get(lowname);
+			TexBean atlas = atlasMap.get(lowname);
 			atlasMap.remove(lowname);
 			atlas.dispose();
 		}
 	}
 
 	public void dispose() {
-		for (Texture t : textureMap.values()){
+		for (TexBean t : textureMap.values()){
 			t.dispose();
 		}
 		textureMap.clear();

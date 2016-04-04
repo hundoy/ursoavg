@@ -12,12 +12,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.urso.avg.ctrl.AssetCtrl;
 import com.urso.avg.ctrl.ErrorCtrl;
 import com.urso.avg.ctrl.FontCtrl;
+import com.urso.avg.ctrl.LayerCtrl;
 
 public class UrsoAvgGame extends Game {
-	SpriteBatch batch;
+	public SpriteBatch batch;
 	public FontCtrl font;
 	public AssetCtrl asset;
 	public ErrorCtrl error;
+	public LayerCtrl layer;
 	
 	public static final int SCW = 1069;
 	public static final int SCH = 600;	
@@ -36,6 +38,9 @@ public class UrsoAvgGame extends Game {
 		// init error control
 		error = new ErrorCtrl(this, "");
 		
+		// init layer control
+		layer = new LayerCtrl(this);
+		
 		this.setScreen(new AvgScreen(this));
 	}
 
@@ -50,5 +55,6 @@ public class UrsoAvgGame extends Game {
 		font.dispose();
 		asset.dispose();
 		error.dispose();
+		layer.dispose();
 	}
 }

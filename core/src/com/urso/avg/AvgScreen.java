@@ -22,6 +22,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.urso.avg.bean.DicBean;
+import com.urso.avg.ctrl.LayerCtrl;
 
 public class AvgScreen implements Screen {
 	
@@ -59,52 +61,55 @@ public class AvgScreen implements Screen {
 		uiStage = new Stage();
 		
 		// graphics test temp
-		picPath = "data/graphics/";
-		Texture bg1Tex = new Texture(Gdx.files.local(picPath+"bg_wycj.jpg"));
-		Texture bg2Tex = new Texture(Gdx.files.local(picPath+"bg_wyg.jpg"));
-		Sprite bg1 = new Sprite(bg1Tex, 0, 0, game.SCW, game.SCH);
-		Sprite bg2 = new Sprite(bg2Tex, 0, 0, game.SCW, game.SCH);
-		spArr = new Array<Sprite>();
-		spArr.add(bg1);
-		spArr.add(bg2);
+//		picPath = "data/graphics/";
+//		Texture bg1Tex = new Texture(Gdx.files.local(picPath+"bg_wycj.jpg"));
+//		Texture bg2Tex = new Texture(Gdx.files.local(picPath+"bg_wyg.jpg"));
+//		Sprite bg1 = new Sprite(bg1Tex, 0, 0, game.SCW, game.SCH);
+//		Sprite bg2 = new Sprite(bg2Tex, 0, 0, game.SCW, game.SCH);
+//		spArr = new Array<Sprite>();
+//		spArr.add(bg1);
+//		spArr.add(bg2);
 		
-		TextureAtlas monAtlas = new TextureAtlas(Gdx.files.local(picPath+"monsters.atlas"));
-		Sprite spAsura = monAtlas.createSprite("Asura");
-		Sprite spPriest = monAtlas.createSprite("Priest");
-		Sprite spCockatrice = monAtlas.createSprite("Cockatrice");
-		spPriest.setPosition(0, 0);
-		spArr.add(spAsura);
-		spArr.add(spPriest);
-		spArr.add(spCockatrice);
+//		TextureAtlas monAtlas = new TextureAtlas(Gdx.files.local(picPath+"monsters.atlas"));
+//		Sprite spAsura = monAtlas.createSprite("Asura");
+//		Sprite spPriest = monAtlas.createSprite("Priest");
+//		Sprite spCockatrice = monAtlas.createSprite("Cockatrice");
+//		spPriest.setPosition(0, 0);
+//		spArr.add(spAsura);
+//		spArr.add(spPriest);
+//		spArr.add(spCockatrice);
 		
 		// crossfade test
-		curFrameBuffer = new FrameBuffer(Format.RGBA8888, UrsoAvgGame.SCW, UrsoAvgGame.SCH, false);
-		nextFrameBuffer = new FrameBuffer(Format.RGBA8888, UrsoAvgGame.SCW, UrsoAvgGame.SCH, false);
-		time = 0;
-		state = GalleryState.PICTURE;	
-		nextState = GalleryState.PICTURE;
-		
-		// shader test
-		shaders = new ShaderProgram[4];
-		shaderNames = new String[4];
-		shaders[0] = null;
-		shaderNames[0] = "Null";
-		shaders[1] = new ShaderProgram(Gdx.files.internal("data/shaders/grayscale.vert"), 
-				Gdx.files.internal("data/shaders/grayscale.frag"));
-		shaderNames[1] = "GrayScale";
-		shaders[2] = new ShaderProgram(Gdx.files.internal("data/shaders/sepia.vert"),
-				   Gdx.files.internal("data/shaders/sepia.frag"));
-		shaderNames[2] = "Sepia";
-		shaders[3] = new ShaderProgram(Gdx.files.internal("data/shaders/inverted.vert"),
-						   Gdx.files.internal("data/shaders/inverted.frag"));
-		shaderNames[3] = "Inverted";
+//		curFrameBuffer = new FrameBuffer(Format.RGBA8888, UrsoAvgGame.SCW, UrsoAvgGame.SCH, false);
+//		nextFrameBuffer = new FrameBuffer(Format.RGBA8888, UrsoAvgGame.SCW, UrsoAvgGame.SCH, false);
+//		time = 0;
+//		state = GalleryState.PICTURE;	
+//		nextState = GalleryState.PICTURE;
+//		
+//		// shader test
+//		shaders = new ShaderProgram[4];
+//		shaderNames = new String[4];
+//		shaders[0] = null;
+//		shaderNames[0] = "Null";
+//		shaders[1] = new ShaderProgram(Gdx.files.internal("data/shaders/grayscale.vert"), 
+//				Gdx.files.internal("data/shaders/grayscale.frag"));
+//		shaderNames[1] = "GrayScale";
+//		shaders[2] = new ShaderProgram(Gdx.files.internal("data/shaders/sepia.vert"),
+//				   Gdx.files.internal("data/shaders/sepia.frag"));
+//		shaderNames[2] = "Sepia";
+//		shaders[3] = new ShaderProgram(Gdx.files.internal("data/shaders/inverted.vert"),
+//						   Gdx.files.internal("data/shaders/inverted.frag"));
+//		shaderNames[3] = "Inverted";
 		
 	}
 	
 	
 	@Override
 	public void show() {
-
+		game.layer.addPicLayer(LayerCtrl.LAYER_FORE, 1);
+		game.layer.addPicLayer(LayerCtrl.LAYER_FORE, 2);
+		game.layer.setPicLayer(new DicBean("id=1 n=bg_ywc"));
+		game.layer.setPicLayer(new DicBean("id=2 n=monsters.Asura x=200 y=100 opa=140"));
 	}
 
 	@Override
@@ -112,20 +117,36 @@ public class AvgScreen implements Screen {
 		handleInput();
 		camera.update();
 		game.batch.setProjectionMatrix(camera.combined);
-		time+=delta;
 		
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+		paint();
 		
-		switch(state){
-		case PICTURE:
-			updatePicture();
-			break;
-		case TRANSITIONING:
-			updateTrans();
-			break;
-		}
+//		time+=delta;
+		
+//		Gdx.gl.glClearColor(0, 0, 0, 1);
+//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+		
+		
+//		switch(state){
+//		case PICTURE:
+//			updatePicture();
+//			break;
+//		case TRANSITIONING:
+//			updateTrans();
+//			break;
+//		}
 	}
+
+	/**
+	 * paint pics
+	 */
+	private void paint() {
+		game.layer.beforePaint();
+		
+		game.layer.paint();
+		
+		game.layer.afterPaint();
+	}
+
 
 	private void updateTrans() {
 		float alpha = Math.min(1f, time/2f);
@@ -227,6 +248,8 @@ public class AvgScreen implements Screen {
 	@Override
 	public void dispose() {
 		uiStage.dispose();
+		
+		// just for test
 		for (Sprite sp : spArr){
 			sp.getTexture().dispose();
 		}

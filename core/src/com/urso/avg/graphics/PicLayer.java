@@ -7,27 +7,32 @@
 */
 package com.urso.avg.graphics;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector3;
 import com.urso.avg.UrsoAvgGame;
+import com.urso.avg.bean.TexBean;
 import com.urso.avg.tool.ToolUtil;
 
 public class PicLayer extends UrsoLayer {
 	private String picName;
 	private Sprite sp;
+	private TexBean tex;
 	
 	public PicLayer(UrsoAvgGame game, int uid, String uname) {
 		super(game, uid, uname);
 		
-		priority = uid;
+		priority = uid*1000;
 	}
 
 	// load texture directly
 	public void loadPic(String texName){
 		if (ToolUtil.isnnb(texName)){
-			this.picName = texName;
-			Texture tex = game.asset.loadTexture(picName);
-			sp = new Sprite(tex);
+			TexBean bean = game.asset.loadTexture(texName);
+			if (bean!=null){
+				tex = bean;
+				sp = tex.createSprite();
+				this.picName = texName;
+			}
 		}
 	}
 	
@@ -40,8 +45,71 @@ public class PicLayer extends UrsoLayer {
 			} else{
 				String aname = picName.substring(0, index);
 				String pname = picName.substring(index+1);
-				
+				TexBean bean = game.asset.loadAtlas(aname);
+				if (bean!=null){
+					Sprite sprite = bean.createSprite(pname);
+					if (sprite!=null){
+						tex = bean;
+						sp = sprite;
+						this.picName = picName;
+					}
+				}
 			}
 		}
 	}
+	
+	public void disposeSp(){
+		if (tex!=null && sp!=null){
+			tex.removeSprite(sp);
+		}
+	}
+
+	
+	@Override
+	public void beforePaint() {
+		super.beforePaint();
+		
+		if (sp!=null){
+			Vector3 vec = getActualPos();
+			sp.setPosition(vec.x, vec.y);
+			sp.flip(false, true);
+		}
+	}
+
+	@Override
+	public void afterPaint() {
+		super.afterPaint();
+		
+		if (sp!=null){
+			sp.flip(false, true);
+		}
+	}
+
+	@Override
+	public void paint() {
+		super.paint();
+		
+		if (sp!=null){
+			sp.draw(game.batch);
+		}
+	}
+
+	// getter and setter
+	public String getPicName() {
+		return picName;
+	}
+
+	public void setPicName(String picName) {
+		this.picName = picName;
+	}
+
+	public Sprite getSp() {
+		return sp;
+	}
+
+	public void setSp(Sprite sp) {
+		this.sp = sp;
+	}
+	
+	
 }
