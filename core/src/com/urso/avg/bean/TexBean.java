@@ -37,19 +37,17 @@ public class TexBean {
 		this.type = type;
 	}
 	
-	public void initTexture(String lowName, String fileName, String filePath, 
-			int type, Texture texture){
-		init(lowName, fileName, filePath, 0);
+	public void initTexture(String lowName, String fileName, String filePath, Texture texture){
+		init(lowName, fileName, filePath, TYPE_TEXTURE);
 		this.texture = texture;
 	}
 	
-	public void initAtlas(String lowName, String fileName, String filePath, 
-			int type, TextureAtlas atlas){
-		init(lowName, fileName, filePath, 0);
+	public void initAtlas(String lowName, String fileName, String filePath, TextureAtlas atlas){
+		init(lowName, fileName, filePath, TYPE_ATLAS);
 		this.atlas = atlas;
 	}
 	
-	// crate a sprite with texture
+	// create a sprite with texture
 	public Sprite createSprite(){
 		if (texture != null){
 			Sprite sp = new Sprite(texture);

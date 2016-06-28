@@ -33,7 +33,7 @@ public class UrsoAvgGame extends Game {
 		font.loadFont("bgqc.TTF", 18);
 		
 		// init asset control
-		asset = new AssetCtrl(this, "data/graphics/");
+		asset = new AssetCtrl(this, new String[]{"data/graphics/"});
 		
 		// init error control
 		error = new ErrorCtrl(this, "");
