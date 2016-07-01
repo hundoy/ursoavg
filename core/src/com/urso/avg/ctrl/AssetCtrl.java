@@ -2,7 +2,7 @@
 * @Title: AssetCtrl.java
 * @Description: asset control class. it is used to store the using texture and atlas
 * @author Hundoy - Zohar  
-* @date 2016Äê3ÔÂ30ÈÕ ÏÂÎç4:25:46
+* @date 2016å¹´3æœˆ30æ—¥ ä¸‹åˆ4:25:46
 * @version V1.0  
 */
 package com.urso.avg.ctrl;

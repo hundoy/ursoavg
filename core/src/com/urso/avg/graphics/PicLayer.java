@@ -2,7 +2,7 @@
 * @Title: PicLayer.java
 * @Description: graphics layer
 * @author Hundoy - Zohar  
-* @date 2016ƒÍ3‘¬30»’ œ¬ŒÁ4:20:11
+* @date 2016Âπ¥3Êúà30Êó• ‰∏ãÂçà4:20:11
 * @version V1.0
 */
 package com.urso.avg.graphics;
@@ -10,13 +10,15 @@ package com.urso.avg.graphics;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import com.urso.avg.UrsoAvgGame;
+import com.urso.avg.bean.PicBean;
 import com.urso.avg.bean.TexBean;
 import com.urso.avg.tool.ToolUtil;
 
 public class PicLayer extends UrsoLayer {
 	private String picName;
-	private Sprite sp;
-	private TexBean tex;
+	private PicBean pic;
+	//private Sprite sp;
+//	private TexBean tex;
 	
 	public PicLayer(UrsoAvgGame game, int uid, String uname) {
 		super(game, uid, uname);
@@ -24,55 +26,23 @@ public class PicLayer extends UrsoLayer {
 		priority = uid*1000;
 	}
 
-	// load texture directly
-	public void loadPic(String texName){
-		if (ToolUtil.isnnb(texName)){
-			TexBean bean = game.asset.loadTexture(texName);
-			if (bean!=null){
-				tex = bean;
-				sp = tex.createSprite();
-				this.picName = texName;
-			}
-		}
+	public void loadPic(String name){
+		pic = game.asset.loadPic(name);
 	}
 	
-	// load via atlas
-	public void loadAtlasPic(String picName){
-		if (ToolUtil.isnnb(picName)){
-			int index = picName.indexOf(".");
-			if (index<=-1 || index==picName.length()-1){
-				game.error.formatError("Atlas pic format should be 'ATLAS_NAME.PIC_NAME' !");
-			} else{
-				String aname = picName.substring(0, index);
-				String pname = picName.substring(index+1);
-				TexBean bean = game.asset.loadAtlas(aname);
-				if (bean!=null){
-					Sprite sprite = bean.createSprite(pname);
-					if (sprite!=null){
-						tex = bean;
-						sp = sprite;
-						this.picName = picName;
-					}
-				}
-			}
-		}
-	}
-	
-	public void disposeSp(){
-		if (tex!=null && sp!=null){
-			tex.removeSprite(sp);
-		}
+	public void dispose(){
+		pic.release();
+		pic = null;
 	}
 
-	
 	@Override
 	public void beforePaint() {
 		super.beforePaint();
 		
-		if (sp!=null){
+		if (pic!=null){
 			Vector3 vec = getActualPos();
-			sp.setPosition(vec.x, vec.y);
-			sp.flip(false, true);
+			pic.getSp().setPosition(vec.x, vec.y);
+			pic.getSp().flip(false, true);
 		}
 	}
 
@@ -80,8 +50,8 @@ public class PicLayer extends UrsoLayer {
 	public void afterPaint() {
 		super.afterPaint();
 		
-		if (sp!=null){
-			sp.flip(false, true);
+		if (pic!=null){
+			pic.getSp().flip(false, true);
 		}
 	}
 
@@ -89,8 +59,8 @@ public class PicLayer extends UrsoLayer {
 	public void paint() {
 		super.paint();
 		
-		if (sp!=null){
-			sp.draw(game.batch);
+		if (pic!=null){
+			pic.getSp().draw(game.batch);
 		}
 	}
 
@@ -102,14 +72,4 @@ public class PicLayer extends UrsoLayer {
 	public void setPicName(String picName) {
 		this.picName = picName;
 	}
-
-	public Sprite getSp() {
-		return sp;
-	}
-
-	public void setSp(Sprite sp) {
-		this.sp = sp;
-	}
-	
-	
 }

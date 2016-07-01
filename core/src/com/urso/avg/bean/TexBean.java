@@ -2,7 +2,7 @@
 * @Title: TexBean.java
 * @Description: a bean store a texture or atlas
 * @author Hundoy - Zohar  
-* @date 2016Äê4ÔÂ3ÈÕ ÏÂÎç10:28:53
+* @date 2016å¹´4æœˆ3æ—¥ ä¸‹åˆ10:28:53
 * @version V1.0  
 */
 package com.urso.avg.bean;

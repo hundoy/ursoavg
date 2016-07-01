@@ -58,11 +58,19 @@ public class PicsrcBean {
         }
     }
 
+    // release one pic
+    public void release(PicBean pic){
+        pic.dispose();
+        picArr.removeValue(pic, true);
+    }
+
     // release all the source in this bean
     public void release() {
         for (PicBean pic: picArr){
             pic.dispose();
         }
+        picArr.clear();
+
         if (texture!=null){
             texture.dispose();
         }

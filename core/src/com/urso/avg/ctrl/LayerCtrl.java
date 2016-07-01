@@ -2,7 +2,7 @@
 * @Title: LayerCtrl.java
 * @Description: to control layers 
 * @author Hundoy - Zohar  
-* @date 2016ƒÍ3‘¬31»’ œ¬ŒÁ5:43:06
+* @date 2016Âπ¥3Êúà31Êó• ‰∏ãÂçà5:43:06
 * @version V1.0  
 */
 package com.urso.avg.ctrl;
@@ -33,9 +33,9 @@ public class LayerCtrl {
 	private Array<UrsoLayer> foreLayerArr;
 	private Array<UrsoLayer> backLayerArr;
 	
-	// store layers via id
-	private HashMap<Integer, UrsoLayer> foreLayerMap;
-	private HashMap<Integer, UrsoLayer> backLayerMap;
+	// store layers via uname
+	private HashMap<String, UrsoLayer> foreLayerMap;
+	private HashMap<String, UrsoLayer> backLayerMap;
 	
 	private FrameBuffer foreFb;
 	private FrameBuffer backFb;
@@ -49,67 +49,77 @@ public class LayerCtrl {
 		
 		foreLayerArr = new Array<UrsoLayer>();
 		backLayerArr = new Array<UrsoLayer>();
-		foreLayerMap = new HashMap<Integer, UrsoLayer>();
-		backLayerMap = new HashMap<Integer, UrsoLayer>();
+		foreLayerMap = new HashMap<String, UrsoLayer>();
+		backLayerMap = new HashMap<String, UrsoLayer>();
 		foreFb = new FrameBuffer(Format.RGBA8888, UrsoAvgGame.SCW, UrsoAvgGame.SCH, false);
 		backFb = new FrameBuffer(Format.RGBA8888, UrsoAvgGame.SCW, UrsoAvgGame.SCH, false);
 
 	}
 	
 	// add a pic layer and sort layer array to keep the right priority
-	public PicLayer addPicLayer(int foreback, int uid){
-		String uname = PIC_NAME_PREFIX + uid;
-		PicLayer pic = new PicLayer(game, uid, uname);
+	public PicLayer addPicLayer(int foreback, String uname){
+		freeLayer(foreback, uname); // free firstly
+		PicLayer pic = new PicLayer(game, 0, uname);
 		if (foreback == LAYER_BACK){
-			backLayerMap.put(uid, pic);
+			backLayerMap.put(uname, pic);
 			backLayerArr.add(pic);
 			backLayerArr.sort();
 		} else {
-			foreLayerMap.put(uid, pic);
+			foreLayerMap.put(uname, pic);
 			foreLayerArr.add(pic);
 			foreLayerArr.sort();
 		}
 		
 		return pic;
 	}
+
+	public void freeLayer(int foreback, String uname){
+		if (foreback == LAYER_BACK){
+			if (backLayerMap.containsKey(uname)){
+				UrsoLayer lay = backLayerMap.get(uname);
+				backLayerMap.remove(uname);
+				backLayerArr.removeValue(lay, true);
+				lay.dispose();
+			}
+		} else{
+			if (foreLayerMap.containsKey(uname)){
+				UrsoLayer lay = foreLayerMap.get(uname);
+				foreLayerMap.remove(uname);
+				foreLayerArr.removeValue(lay, true);
+				lay.dispose();
+			}
+		}
+	}
 	
 	/* 
 	 * set properties with a dictionary ( make it easy to extend )
-	 * [id=1(>0), n=picture_name, x=x_position, y=y_position, 
+	 * [id=uname, n=picture_name, x=x_position, y=y_position,
 	 * vis=is_visible, opa=255(opacity), prior=2400(priority)]
 	 */
 	public PicLayer setPicLayer(DicBean dic){
-		int uid = dic.getInt("id");
+		String uname = dic.get("id");
 		PicLayer layer = null;
-		if (dic.get("page").equals("back") && backLayerMap.containsKey(uid)){
-			layer = (PicLayer) backLayerMap.get(uid);
-		} else if (foreLayerMap.containsKey(uid)){
-			layer = (PicLayer) foreLayerMap.get(uid);
+		if (dic.get("page").equals("back")){
+			layer = (PicLayer) backLayerMap.get(uname);
+		} else if (foreLayerMap.containsKey(uname)){
+			layer = (PicLayer) foreLayerMap.get(uname);
 		}
 		
 		// set properties
-		if (layer!=null){
-			String storage = dic.get("n");
-			if (isnnb(storage)){
-				if (storage.indexOf(".")>-1){
-					layer.loadAtlasPic(storage);
-				} else {
-					layer.loadPic(storage);
-				}
-			}
-			if (dic.ct("x") && dic.ct("y")) layer.setPos(dic.getInt("x"), dic.getInt("y"));
-			if (dic.ct("vis")) layer.setVisible(dic.getBool("vis"));
-			if (dic.ct("opa")) layer.setOpacity(dic.getInt("opa"));
-			if (dic.ct("prior")) layer.setPriority(dic.getInt("prior"));
-			
-			
-			if (dic.get("page").equals("back")){
-				backLayerMap.put(uid, layer);
-			} else{
-				foreLayerMap.put(uid, layer);
-			}
+		String storage = dic.get("n");
+		layer.loadPic(storage);
+		if (dic.have("x") && dic.have("y")) layer.setPos(dic.getInt("x"), dic.getInt("y"));
+		if (dic.have("vis")) layer.setVisible(dic.getBool("vis"));
+		if (dic.have("opa")) layer.setOpacity(dic.getInt("opa"));
+		if (dic.have("prior")) layer.setPriority(dic.getInt("prior"));
+
+
+		if (dic.get("page").equals("back")){
+			backLayerMap.put(uname, layer);
+		} else{
+			foreLayerMap.put(uname, layer);
 		}
-		
+
 		return layer;
 	}
 

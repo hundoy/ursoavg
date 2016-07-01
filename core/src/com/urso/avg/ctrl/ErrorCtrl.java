@@ -2,7 +2,7 @@
 * @Title: ErrorCtrl.java
 * @Description: This class used to handle and display some error or warning for game
 * @author Hundoy - Zohar  
-* @date 2016Äê3ÔÂ30ÈÕ ÏÂÎç5:04:39
+* @date 2016å¹´3æœˆ30æ—¥ ä¸‹åˆ5:04:39
 * @version V1.0  
 */
 package com.urso.avg.ctrl;

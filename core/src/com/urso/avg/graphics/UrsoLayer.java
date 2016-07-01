@@ -2,7 +2,7 @@
 * @Title: UrsoLayer.java
 * @Description: basic layer class for urso avg
 * @author Hundoy - Zohar  
-* @date 2016Äê3ÔÂ30ÈÕ ÏÂÎç4:12:12
+* @date 2016å¹´3æœˆ30æ—¥ ä¸‹åˆ4:12:12
 * @version V1.0
 */
 package com.urso.avg.graphics;

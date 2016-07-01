@@ -24,8 +24,11 @@ public class PicBean {
         }
     }
 
-    public void dispose() {
+    public void release(){
+        picsrc.release(this);
+    }
 
+    public void dispose() {
     }
 
     public PicsrcBean getPicsrc() {

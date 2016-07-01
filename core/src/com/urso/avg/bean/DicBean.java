@@ -2,7 +2,7 @@
 * @Title: DicBean.java
 * @Description: a dictionary class like a string->string hashmap
 * @author Hundoy - Zohar  
-* @date 2016Äê4ÔÂ4ÈÕ ÏÂÎç8:21:34
+* @date 2016å¹´4æœˆ4æ—¥ ä¸‹åˆ8:21:34
 * @version V1.0  
 */
 package com.urso.avg.bean;
@@ -23,7 +23,7 @@ public class DicBean {
 	}
 	
 	/**
-	 * @param string
+	 * @param str
 	 */
 	public DicBean(String str) {
 		this();
@@ -35,7 +35,7 @@ public class DicBean {
 					if (arrstr.indexOf("=")>-1){
 						String[] kv = arrstr.split("=");
 						if (isnne(kv) && kv.length>=2){
-							String k = kv[0].trim();
+							String k = kv[0].trim().toLowerCase();
 							String v = kv[1].trim();
 							if (isnnb(k)){
 								map.put(k, v);
@@ -99,7 +99,7 @@ public class DicBean {
 		return false;
 	}
 	
-	public boolean ct(String k){
+	public boolean have(String k){
 		if (isnnb(k)){
 			return map.containsKey(k.toLowerCase());
 		}
