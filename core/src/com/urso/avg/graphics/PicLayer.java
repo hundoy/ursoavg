@@ -7,19 +7,14 @@
 */
 package com.urso.avg.graphics;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import com.urso.avg.UrsoAvgGame;
 import com.urso.avg.bean.PicBean;
-import com.urso.avg.bean.TexBean;
-import com.urso.avg.tool.ToolUtil;
 
 public class PicLayer extends UrsoLayer {
 	private String picName;
 	private PicBean pic;
-	//private Sprite sp;
-//	private TexBean tex;
-	
+
 	public PicLayer(UrsoAvgGame game, int uid, String uname) {
 		super(game, uid, uname);
 		

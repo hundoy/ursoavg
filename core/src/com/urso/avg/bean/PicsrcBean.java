@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 
+import static com.urso.avg.tool.ToolUtil.isnnb;
+
 /**
  * Created by Hundoy on 2016/6/27.
  */
@@ -40,12 +42,14 @@ public class PicsrcBean {
 
     private void loadTexture() {
         if (texture == null){
-            texture = new Texture(Gdx.files.local(filePath + fileName));
+            texture = new Texture(Gdx.files.local(filePath));
         }
     }
 
     // create a sprite with atlas name
     public PicBean createPic(String name){
+        if (!isnnb(name)) return createPic();
+
         loadAtlas();
         PicBean pic = new PicBean(this, name);
         picArr.add(pic);
@@ -54,7 +58,7 @@ public class PicsrcBean {
 
     private void loadAtlas() {
         if (atlas==null){
-            atlas = new TextureAtlas(filePath + fileName);
+            atlas = new TextureAtlas(Gdx.files.local(filePath));
         }
     }
 

@@ -2,7 +2,7 @@
 * @Title: ToolUtil.java
 * @Description: A tool class with some convenient methods
 * @author Hundoy - Zohar  
-* @date 2016Äê3ÔÂ30ÈÕ ÏÂÎç4:38:19
+* @date 2016å¹´3æœˆ30æ—¥ ä¸‹åˆ4:38:19
 * @version V1.0  
 */
 package com.urso.avg.tool;

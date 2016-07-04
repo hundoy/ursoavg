@@ -102,14 +102,13 @@ public class AvgScreen implements Screen {
 //		shaderNames[3] = "Inverted";
 		
 	}
-	
-	
+
 	@Override
 	public void show() {
-		game.layer.addPicLayer(LayerCtrl.LAYER_FORE, 1);
-		game.layer.addPicLayer(LayerCtrl.LAYER_FORE, 2);
-		game.layer.setPicLayer(new DicBean("id=1 n=bg_ywc"));
-		game.layer.setPicLayer(new DicBean("id=2 n=monsters.Asura x=200 y=100 opa=140"));
+		game.layer.addPicLayer(LayerCtrl.LAYER_FORE, "bg");
+		game.layer.addPicLayer(LayerCtrl.LAYER_FORE, "mons");
+		game.layer.setPicLayer(new DicBean("id=bg n=bssit"));
+		game.layer.setPicLayer(new DicBean("id=mons n=blocks.red x=200 y=100 opa=140"));
 	}
 
 	@Override

@@ -33,6 +33,8 @@ public class AssetCtrl {
 	 * scan the picture path for all the pics' names;
 	 */
 	private void scanFiles() {
+		picsrcMap = new HashMap<String, PicsrcBean>();
+
 		if (isnne(paths)){
 			for (String path : paths){
 				if (!path.endsWith("/")) path += "/";
@@ -43,15 +45,15 @@ public class AssetCtrl {
 						String lowname = actualname.toLowerCase();
 						String exname = "";
 						if (lowname.indexOf(".")>-1){
-							lowname = lowname.substring(0, lowname.indexOf("."));
-							exname = lowname.substring(actualname.indexOf("."));
+                            exname = lowname.substring(actualname.indexOf("."));
+                            lowname = lowname.substring(0, lowname.indexOf("."));
 						}
 						// Graphics
-						if (exname.equalsIgnoreCase(".png") || exname.equalsIgnoreCase(".jpg")){
+                        if (exname.equalsIgnoreCase(".atlas")){
+                            PicsrcBean ps = new PicsrcBean(lowname, actualname, path+actualname, PicsrcBean.TYPE_ATLAS);
+                            picsrcMap.put(lowname, ps);
+                        } else if (!picsrcMap.containsKey(lowname) && exname.equalsIgnoreCase(".png") || exname.equalsIgnoreCase(".jpg")){
 							PicsrcBean ps = new PicsrcBean(lowname, actualname, path+actualname, PicsrcBean.TYPE_TEXTURE);
-							picsrcMap.put(lowname, ps);
-						} else if (exname.equalsIgnoreCase(".atlas")){
-							PicsrcBean ps = new PicsrcBean(lowname, actualname, path+actualname, PicsrcBean.TYPE_ATLAS);
 							picsrcMap.put(lowname, ps);
 						}
 						// Sound
@@ -70,10 +72,10 @@ public class AssetCtrl {
 		String picName = null;
 		if (name.contains(".")){
 			// atlas
-			fileName = fileName.substring(0, fileName.indexOf("."));
-			picName = fileName.substring(fileName.indexOf(".")+1);
+            picName = fileName.substring(fileName.indexOf(".")+1);
+            fileName = fileName.substring(0, fileName.indexOf("."));
 		}
-		PicBean pic = new PicBean(picsrcMap.get(fileName), picName);
+		PicBean pic = picsrcMap.get(fileName).createPic(picName);
 		return pic;
 	}
 
