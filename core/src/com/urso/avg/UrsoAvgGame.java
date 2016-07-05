@@ -9,6 +9,7 @@ package com.urso.avg;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.koko.core.KokoSayer;
 import com.urso.avg.ctrl.AssetCtrl;
 import com.urso.avg.ctrl.ErrorCtrl;
 import com.urso.avg.ctrl.FontCtrl;
@@ -20,6 +21,7 @@ public class UrsoAvgGame extends Game {
 	public AssetCtrl asset;
 	public ErrorCtrl error;
 	public LayerCtrl layer;
+	public KokoSayer sayer;
 	
 	public static final int SCW = 1069;
 	public static final int SCH = 600;	
@@ -40,7 +42,11 @@ public class UrsoAvgGame extends Game {
 		
 		// init layer control
 		layer = new LayerCtrl(this);
-		
+
+		// init kokosayer
+		sayer = new KokoSayer("data/config/kokoconfig.json");
+		sayer.init("data/scenario/", "first");
+
 		this.setScreen(new AvgScreen(this));
 	}
 

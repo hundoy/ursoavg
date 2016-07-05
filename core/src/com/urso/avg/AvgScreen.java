@@ -50,7 +50,11 @@ public class AvgScreen implements Screen {
 	private ShaderProgram[] shaders;
 	private String[] shaderNames;
 	private int currentShader;
-	
+
+    // 0-nowait 1-wait click 2-wait time 3-wait sth
+    private int waitType = 0;
+    private float waitTime = 0;
+
 	
 	public AvgScreen(UrsoAvgGame game){
 		this.game = game;
@@ -105,10 +109,11 @@ public class AvgScreen implements Screen {
 
 	@Override
 	public void show() {
-		game.layer.addPicLayer(LayerCtrl.LAYER_FORE, "bg");
-		game.layer.addPicLayer(LayerCtrl.LAYER_FORE, "mons");
-		game.layer.setPicLayer(new DicBean("id=bg n=bssit"));
-		game.layer.setPicLayer(new DicBean("id=mons n=blocks.red x=200 y=100 opa=140"));
+//		game.layer.addPicLayer(LayerCtrl.LAYER_FORE, "bg");
+//		game.layer.addPicLayer(LayerCtrl.LAYER_FORE, "mons");
+//		game.layer.setPicLayer(new DicBean("id=bg n=bssit"));
+//		game.layer.setPicLayer(new DicBean("id=mons n=blocks.red x=200 y=100 opa=140"));
+        game.sayer.start(game);
 	}
 
 	@Override
@@ -211,6 +216,11 @@ public class AvgScreen implements Screen {
 
 
 	private void handleInput() {
+        if (waitType==1 && Gdx.input.justTouched()){
+            waitType = 0;
+            game.sayer.next();
+        }
+
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)){
 			currentShader = (currentShader + 1) % shaders.length;
 			game.batch.setShader(shaders[currentShader]);
