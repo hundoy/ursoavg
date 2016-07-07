@@ -51,9 +51,7 @@ public class AvgScreen implements Screen {
 	private String[] shaderNames;
 	private int currentShader;
 
-    // 0-nowait 1-wait click 2-wait time 3-wait sth
-    private int waitType = 0;
-    private float waitTime = 0;
+
 
 	
 	public AvgScreen(UrsoAvgGame game){
@@ -216,9 +214,8 @@ public class AvgScreen implements Screen {
 
 
 	private void handleInput() {
-        if (waitType==1 && Gdx.input.justTouched()){
-            waitType = 0;
-            game.sayer.next();
+        if (game.sayer.getWaitType()==1 && Gdx.input.justTouched()){
+            game.sayer.goonPlease();
         }
 
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)){

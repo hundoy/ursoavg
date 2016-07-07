@@ -13,6 +13,7 @@ import java.util.List;
 public class KokoStory extends KokoBaseBean{
     private List<KokoPage> pages;
     private KokoPage curPage;
+    private int index;
 
     @Override
     protected void analyze() {
@@ -29,13 +30,25 @@ public class KokoStory extends KokoBaseBean{
     }
 
     public void start(UrsoAvgGame game) {
-        for (KokoPage page: pages){
-            curPage = page;
-            curPage.start(game);
-        }
+        index = -1;
+        nextPage(game);
+    }
+
+    public void goon(UrsoAvgGame g){
+        curPage.nextLine(g);
     }
 
     public void startFrom(String pageLabel){
 
+    }
+
+    public void nextPage(UrsoAvgGame game) {
+        index++;
+        if (index>pages.size()-1){
+            // do nothing, just stop..?
+        } else{
+            curPage = pages.get(index);
+            curPage.start(game, this);
+        }
     }
 }

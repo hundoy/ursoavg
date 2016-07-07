@@ -31,6 +31,10 @@ public class KokoSayer {
 
     private KokoStory curStory;
 
+    // 0-nowait 1-wait time 2-wait click 3-wait forever
+    private int waitType = 0;
+    private float waitTime = 0;
+
     public KokoSayer(String configFile){
         String configStr = FileUtil.getStringFromFile(configFile);
         configJson = new JSONObject(configStr);
@@ -47,8 +51,26 @@ public class KokoSayer {
         say(startStoryName);
     }
 
-    public void next() {
 
+    public void update(){
+
+    }
+
+    // wait time
+    public void waitPlease(float t){
+        waitTime = t;
+        waitType = 1;
+    }
+
+    // wait click or forever
+    public void waitPlease(boolean isClick){
+        if (isClick) waitType = 2;
+        else waitType = 3;
+    }
+
+    public void goonPlease(){
+        waitType = 0;
+        curStory.goon(game);
     }
 
     private void say(String storyName) {
@@ -82,5 +104,12 @@ public class KokoSayer {
         KokoSayer sayer = new KokoSayer("data/config/kokoconfig.json");
         sayer.init("data/scenario/", "first");
 //        sayer.start();
+    }
+
+
+    // getter setter.
+
+    public int getWaitType() {
+        return waitType;
     }
 }

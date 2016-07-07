@@ -143,4 +143,22 @@ public class ToolUtil {
         }
         return result.toString();
     }
+
+    public static boolean isInt(String str){
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static boolean isNum(String str){
+        try{
+            Float.parseFloat(str);
+            return true;
+        } catch(Exception e){
+            return false;
+        }
+    }
 }

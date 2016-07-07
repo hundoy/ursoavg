@@ -1,6 +1,7 @@
 package com.koko.bean.lines;
 
 import com.koko.bean.KokoLine;
+import com.koko.bean.KokoPage;
 import com.urso.avg.UrsoAvgGame;
 import com.urso.avg.bean.DicBean;
 import com.urso.avg.ctrl.LayerCtrl;
@@ -15,7 +16,7 @@ public class KLLayer extends KokoLine {
     }
 
     @Override
-    public void process(UrsoAvgGame g) {
+    public void process(UrsoAvgGame g, KokoPage kpage) {
         int page = LayerCtrl.LAYER_FORE;
         if (pdic.get("page").equalsIgnoreCase("back")){
             page = LayerCtrl.LAYER_BACK;
@@ -23,5 +24,7 @@ public class KLLayer extends KokoLine {
         g.layer.addPicLayer(page, dp);
         pdic.put("id", dp);
         g.layer.setPicLayer(pdic);
+
+        kpage.nextLine(g);
     }
 }

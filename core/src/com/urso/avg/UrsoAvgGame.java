@@ -8,6 +8,7 @@
 package com.urso.avg;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.koko.core.KokoSayer;
 import com.urso.avg.ctrl.AssetCtrl;
@@ -46,6 +47,8 @@ public class UrsoAvgGame extends Game {
 		// init kokosayer
 		sayer = new KokoSayer("data/config/kokoconfig.json");
 		sayer.init("data/scenario/", "first");
+
+		Gdx.input.setInputProcessor(new UrsoInpro());
 
 		this.setScreen(new AvgScreen(this));
 	}

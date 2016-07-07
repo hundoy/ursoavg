@@ -5,6 +5,7 @@ import com.urso.avg.bean.DicBean;
 import com.zohar.common.util.RegExpUtil;
 import com.zohar.common.util.ToolUtil;
 
+import javax.tools.Tool;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Map;
  * Created by hundoy on 16-5-16.
  */
 public class KokoLine extends KokoBaseBean{
+    protected String command;
     protected String dp;
     protected Map<String,String> kps;
     protected DicBean pdic;
@@ -21,6 +23,7 @@ public class KokoLine extends KokoBaseBean{
     protected void analyze() {
         kps = new HashMap<String, String>();
         List<String> rs = RegExpUtil.regFindFirstByAllGroup("\\[(\\S+)(\\s+(\\S+))?(\\s+([^\\]]+))*", oriScript);
+        if (rs.size()>=1 && !ToolUtil.isNullOrBlank(rs.get(0))) command = rs.get(0);
         if (rs.size()>=3 && !ToolUtil.isNullOrBlank(rs.get(2))) dp = rs.get(2);
         String kpsStr = "";
         if (rs.size()>=5 && !ToolUtil.isNullOrBlank(rs.get(4))) kpsStr = rs.get(4);
@@ -34,7 +37,7 @@ public class KokoLine extends KokoBaseBean{
         pdic = new DicBean(kpsStr);
     }
 
-    public void process(UrsoAvgGame game){
+    public void process(UrsoAvgGame game, KokoPage kpage){
 
     }
 }

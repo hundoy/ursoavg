@@ -59,7 +59,14 @@ public class KokoThinker {
             String clsname = lineDefine.getString(type);
             try {
                 Class clz = Class.forName(clsname);
-                lineDefMap.put(type, clz);
+                if (type.indexOf(",")>-1){
+                    String[] typeArr = type.split(",");
+                    for (String oneType: typeArr){
+                        lineDefMap.put(oneType, clz);
+                    }
+                } else{
+                    lineDefMap.put(type, clz);
+                }
             } catch (ClassNotFoundException e) {
                 sb.append("No class ").append(clsname).append(" is defined for line ").append("type").append("\n");
             }

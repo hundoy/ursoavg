@@ -12,6 +12,8 @@ import java.util.List;
 public class KokoPage extends KokoBaseBean {
     private List<KokoLine> lines;
     private KokoLine curLine;
+    private int index;
+    private KokoStory story;
 
     @Override
     protected void analyze() {
@@ -31,10 +33,18 @@ public class KokoPage extends KokoBaseBean {
         }
     }
 
-    public void start(UrsoAvgGame game) {
-        for (KokoLine line: lines){
-            curLine = line;
-            curLine.process(game);
+    public void start(UrsoAvgGame game, KokoStory story) {
+        index = -1;
+        nextLine(game);
+    }
+
+    public void nextLine(UrsoAvgGame game) {
+        index++;
+        if (index>lines.size()-1){
+            story.nextPage(game);
+        } else{
+            curLine = lines.get(index);
+            curLine.process(game, this);
         }
     }
 }
