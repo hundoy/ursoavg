@@ -15,6 +15,7 @@ import com.urso.avg.ctrl.AssetCtrl;
 import com.urso.avg.ctrl.ErrorCtrl;
 import com.urso.avg.ctrl.FontCtrl;
 import com.urso.avg.ctrl.LayerCtrl;
+import com.urso.avg.input.UrsoInpro;
 
 public class UrsoAvgGame extends Game {
 	public SpriteBatch batch;
@@ -48,7 +49,7 @@ public class UrsoAvgGame extends Game {
 		sayer = new KokoSayer("data/config/kokoconfig.json");
 		sayer.init("data/scenario/", "first");
 
-		Gdx.input.setInputProcessor(new UrsoInpro());
+		Gdx.input.setInputProcessor(new UrsoInpro(this));
 
 		this.setScreen(new AvgScreen(this));
 	}

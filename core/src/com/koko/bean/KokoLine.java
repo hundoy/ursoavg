@@ -22,7 +22,7 @@ public class KokoLine extends KokoBaseBean{
     @Override
     protected void analyze() {
         kps = new HashMap<String, String>();
-        List<String> rs = RegExpUtil.regFindFirstByAllGroup("\\[(\\S+)(\\s+(\\S+))?(\\s+([^\\]]+))*", oriScript);
+        List<String> rs = RegExpUtil.regFindFirstByAllGroup("\\[(\\S+)(\\s+([^\\]\\s]+))?(\\s+([^\\]]+))*", oriScript);
         if (rs.size()>=1 && !ToolUtil.isNullOrBlank(rs.get(0))) command = rs.get(0);
         if (rs.size()>=3 && !ToolUtil.isNullOrBlank(rs.get(2))) dp = rs.get(2);
         String kpsStr = "";

@@ -214,9 +214,9 @@ public class AvgScreen implements Screen {
 
 
 	private void handleInput() {
-        if (game.sayer.getWaitType()==1 && Gdx.input.justTouched()){
-            game.sayer.goonPlease();
-        }
+//        if (game.sayer.getWaitType()==1 && Gdx.input.justTouched()){
+//            game.sayer.goonPlease();
+//        }
 
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)){
 			currentShader = (currentShader + 1) % shaders.length;

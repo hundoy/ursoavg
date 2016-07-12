@@ -1,5 +1,7 @@
 package com.koko.core;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.koko.bean.KokoStory;
 import com.urso.avg.UrsoAvgGame;
 import com.zohar.common.util.FileUtil;
@@ -21,6 +23,10 @@ import static com.zohar.common.util.ToolUtil.*;
  */
 public class KokoSayer {
     public final static String EXT_NAME = "sty";
+    public final static int WAIT_NO = 0;
+    public final static int WAIT_TIMER = 1;
+    public final static int WAIT_CLICK = 2;
+    public final static int WAIT_STH = 3;
 
     private UrsoAvgGame game;
     private String scriptPath = "";
@@ -32,8 +38,9 @@ public class KokoSayer {
     private KokoStory curStory;
 
     // 0-nowait 1-wait time 2-wait click 3-wait forever
-    private int waitType = 0;
+    private int waitType = WAIT_NO;
     private float waitTime = 0;
+    private float startWaitTime = 0;
 
     public KokoSayer(String configFile){
         String configStr = FileUtil.getStringFromFile(configFile);
@@ -53,23 +60,26 @@ public class KokoSayer {
 
 
     public void update(){
-
+        if (waitType==WAIT_TIMER && time() - startWaitTime > waitTime){
+            goonPlease();
+        }
     }
 
     // wait time
     public void waitPlease(float t){
+        startWaitTime = time();
         waitTime = t;
-        waitType = 1;
+        waitType = WAIT_TIMER;
     }
 
     // wait click or forever
     public void waitPlease(boolean isClick){
-        if (isClick) waitType = 2;
-        else waitType = 3;
+        if (isClick) waitType = WAIT_CLICK;
+        else waitType = WAIT_STH;
     }
 
     public void goonPlease(){
-        waitType = 0;
+        waitType = WAIT_NO;
         curStory.goon(game);
     }
 
@@ -100,16 +110,11 @@ public class KokoSayer {
         this.scriptPath = scriptPath;
     }
 
-    public static void main(String[] args){
-        KokoSayer sayer = new KokoSayer("data/config/kokoconfig.json");
-        sayer.init("data/scenario/", "first");
-//        sayer.start();
-    }
-
-
-    // getter setter.
-
     public int getWaitType() {
         return waitType;
+    }
+
+    public float time(){
+        return TimeUtils.nanoTime()/1000000000f;
     }
 }

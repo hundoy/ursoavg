@@ -1,11 +1,23 @@
-package com.urso.avg;
+package com.urso.avg.input;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.koko.core.KokoSayer;
+import com.urso.avg.UrsoAvgGame;
 
 /**
  * Created by hundoy on 2016/7/7.
  */
 public class UrsoInpro implements InputProcessor {
+
+    private UrsoAvgGame g;
+
+    public UrsoInpro(UrsoAvgGame g){
+        super();
+        this.g = g;
+    }
+
     @Override
     public boolean keyDown(int keycode) {
         return false;
@@ -28,7 +40,10 @@ public class UrsoInpro implements InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
+        if (button == Input.Buttons.LEFT && g.sayer.getWaitType()== KokoSayer.WAIT_CLICK){
+            g.sayer.goonPlease();
+        }
+        return true;
     }
 
     @Override
