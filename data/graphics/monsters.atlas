@@ -1,0 +1,47 @@
+
+monsters.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Asura
+  rotate: false
+  xy: 1, 146
+  size: 310, 282
+  orig: 310, 282
+  offset: 0, 0
+  index: -1
+Priest
+  rotate: false
+  xy: 313, 181
+  size: 295, 247
+  orig: 295, 247
+  offset: 0, 0
+  index: -1
+Cockatrice
+  rotate: false
+  xy: 1, 1
+  size: 186, 143
+  orig: 186, 143
+  offset: 0, 0
+  index: -1
+Ghost
+  rotate: false
+  xy: 610, 249
+  size: 111, 179
+  orig: 111, 179
+  offset: 0, 0
+  index: -1
+Grappler
+  rotate: false
+  xy: 723, 255
+  size: 98, 173
+  orig: 98, 173
+  offset: 0, 0
+  index: -1
+road
+  rotate: false
+  xy: 189, 24
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1

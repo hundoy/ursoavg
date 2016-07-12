@@ -1,0 +1,14 @@
+{
+
+"lineDefine": {
+ "layer": "com.koko.bean.lines.KLLayer",
+ "sound": "com.koko.bean.lines.KLSound",
+ "goto": "com.koko.bean.lines.KLGoto",
+ "loop": "com.koko.bean.lines.KLLoop",
+ "condition,if": "com.koko.bean.lines.KLCondition",
+ "if": "com.koko.bean.lines.KLCondition",
+ "wait,wt": "com.koko.bean.lines.KLWait"
+}
+
+,"textDefine":"com.koko.bean.lines.KLText"
+}

@@ -1,0 +1,26 @@
+
+blocks.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+green
+  rotate: false
+  xy: 5, 5
+  size: 300, 80
+  orig: 300, 80
+  offset: 0, 0
+  index: -1
+red
+  rotate: false
+  xy: 330, 5
+  size: 300, 80
+  orig: 300, 80
+  offset: 0, 0
+  index: -1
+blue
+  rotate: false
+  xy: 655, 5
+  size: 300, 80
+  orig: 300, 80
+  offset: 0, 0
+  index: -1
