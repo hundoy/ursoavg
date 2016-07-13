@@ -8,6 +8,7 @@
 package com.urso.avg.ctrl;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
@@ -149,6 +150,9 @@ public class LayerCtrl {
 		game.batch.begin();
 		game.batch.setColor(1f, 1f, 1f, 1f);
 		game.batch.draw(foreFb.getColorBufferTexture(), 0, 0);
+		// draw text test
+		game.font.color(Color.RED);
+		game.font.draw("我测试abc123ASGD哈哈！！", 100, 400);
 		game.batch.end();
 	}
 
