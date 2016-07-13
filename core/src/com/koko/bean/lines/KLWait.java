@@ -9,6 +9,9 @@ import com.zohar.common.util.ToolUtil;
  * Created by Administrator on 2016/7/5.
  */
 public class KLWait extends KokoLine {
+    // wait click   [wt/wait c/click]
+    // wait time(seconds)  [wt 3]
+    // wait forever [wt]
     @Override
     public void process(UrsoAvgGame game, KokoPage kpage) {
         if (ToolUtil.isNum(dp)){

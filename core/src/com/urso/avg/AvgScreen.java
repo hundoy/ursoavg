@@ -12,18 +12,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.urso.avg.bean.DicBean;
-import com.urso.avg.ctrl.LayerCtrl;
 
 public class AvgScreen implements Screen {
 	
@@ -116,6 +111,7 @@ public class AvgScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		game.sayer.update();
 		handleInput();
 		camera.update();
 		game.batch.setProjectionMatrix(camera.combined);

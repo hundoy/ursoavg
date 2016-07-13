@@ -7,8 +7,6 @@
 */
 package com.urso.avg.ctrl;
 
-import java.util.HashMap;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -19,7 +17,7 @@ import com.urso.avg.bean.DicBean;
 import com.urso.avg.graphics.PicLayer;
 import com.urso.avg.graphics.UrsoLayer;
 
-import static com.urso.avg.tool.ToolUtil.*;
+import java.util.HashMap;
 
 /**
  * @author zohar
@@ -110,7 +108,7 @@ public class LayerCtrl {
 		layer.loadPic(storage);
 		if (dic.have("x") && dic.have("y")) layer.setPos(dic.getInt("x"), dic.getInt("y"));
 		if (dic.have("vis")) layer.setVisible(dic.getBool("vis"));
-		if (dic.have("opa")) layer.setOpacity(dic.getInt("opa"));
+		if (dic.have("opa")) layer.setOpacity(dic.getFloat("opa"));
 		if (dic.have("prior")) layer.setPriority(dic.getInt("prior"));
 
 

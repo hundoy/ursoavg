@@ -1,19 +1,14 @@
 package com.koko.core;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.koko.bean.KokoStory;
 import com.urso.avg.UrsoAvgGame;
 import com.zohar.common.util.FileUtil;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static com.urso.avg.tool.ToolUtil.isnnb;
-import static com.zohar.common.util.ToolUtil.*;
 
 /**
  * KokoSayer
@@ -115,6 +110,6 @@ public class KokoSayer {
     }
 
     public float time(){
-        return TimeUtils.nanoTime()/1000000000f;
+        return TimeUtils.nanoTime()*1.0f/1000000000f;
     }
 }

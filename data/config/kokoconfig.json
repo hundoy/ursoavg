@@ -1,7 +1,7 @@
 {
 
 "lineDefine": {
- "layer": "com.koko.bean.lines.KLLayer",
+ "layer,freelayer,lay,flay": "com.koko.bean.lines.KLLayer",
  "sound": "com.koko.bean.lines.KLSound",
  "goto": "com.koko.bean.lines.KLGoto",
  "loop": "com.koko.bean.lines.KLLoop",

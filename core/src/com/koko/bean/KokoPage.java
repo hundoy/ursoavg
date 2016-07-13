@@ -35,6 +35,7 @@ public class KokoPage extends KokoBaseBean {
 
     public void start(UrsoAvgGame game, KokoStory story) {
         index = -1;
+        this.story = story;
         nextLine(game);
     }
 

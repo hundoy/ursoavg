@@ -7,10 +7,10 @@
 */
 package com.urso.avg.graphics;
 
-import java.util.HashMap;
-
 import com.badlogic.gdx.math.Vector3;
 import com.urso.avg.UrsoAvgGame;
+
+import java.util.HashMap;
 
 public class UrsoLayer implements Comparable<UrsoLayer> {
 	protected UrsoAvgGame game;
@@ -18,7 +18,7 @@ public class UrsoLayer implements Comparable<UrsoLayer> {
 	protected int uid;
 	protected String uname;
 	protected boolean isVisible = true;
-	protected float opacity = 255;
+	protected float opacity = 1f;
 	protected Vector3 pos = new Vector3(0, 0, 0);
 	protected int priority;
 	protected boolean isPainting = false;
