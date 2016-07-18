@@ -1,13 +1,14 @@
 {
 
 "lineDefine": {
- "layer,freelayer,lay,flay": "com.koko.bean.lines.KLLayer",
+ "layer,freelayer,lay,flay,pic": "com.koko.bean.lines.KLLayer",
  "sound": "com.koko.bean.lines.KLSound",
  "goto": "com.koko.bean.lines.KLGoto",
  "loop": "com.koko.bean.lines.KLLoop",
  "condition,if": "com.koko.bean.lines.KLCondition",
  "if": "com.koko.bean.lines.KLCondition",
- "wait,wt": "com.koko.bean.lines.KLWait"
+ "wait,wt": "com.koko.bean.lines.KLWait",
+ "txt,txtset": "com.koko.bean.lines.KLTxtset"
 }
 
 ,"textDefine":"com.koko.bean.lines.KLText"

@@ -140,7 +140,7 @@ public class AvgScreen implements Screen {
 	private void paint() {
 		game.layer.beforePaint();
 		
-		game.layer.paint();
+		game.layer.paint(viewport);
 		
 		game.layer.afterPaint();
 	}

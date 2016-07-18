@@ -38,7 +38,7 @@ public class PicLayer extends UrsoLayer {
 			Vector3 vec = getActualPos();
 			pic.getSp().setPosition(vec.x, vec.y);
 			pic.getSp().setAlpha(opacity);
-			pic.getSp().flip(false, true);
+//			pic.getSp().flip(false, true);
 		}
 	}
 
@@ -47,7 +47,7 @@ public class PicLayer extends UrsoLayer {
 		super.afterPaint();
 		
 		if (pic!=null){
-			pic.getSp().flip(false, true);
+//			pic.getSp().flip(false, true);
 		}
 	}
 

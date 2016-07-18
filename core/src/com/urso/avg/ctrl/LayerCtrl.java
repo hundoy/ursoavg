@@ -11,8 +11,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.urso.avg.UrsoAvgGame;
 import com.urso.avg.bean.DicBean;
 import com.urso.avg.graphics.PicLayer;
@@ -26,7 +28,7 @@ import java.util.HashMap;
  */
 public class LayerCtrl {
 	
-	private UrsoAvgGame game;
+	private UrsoAvgGame g;
 	
 	// store layers in right order
 	private Array<UrsoLayer> foreLayerArr;
@@ -43,8 +45,8 @@ public class LayerCtrl {
 	public static final int LAYER_FORE = 1;
 	public static final String  PIC_NAME_PREFIX = "pic";
 	
-	public LayerCtrl(UrsoAvgGame game){
-		this.game = game;
+	public LayerCtrl(UrsoAvgGame g){
+		this.g = g;
 		
 		foreLayerArr = new Array<UrsoLayer>();
 		backLayerArr = new Array<UrsoLayer>();
@@ -52,13 +54,12 @@ public class LayerCtrl {
 		backLayerMap = new HashMap<String, UrsoLayer>();
 		foreFb = new FrameBuffer(Format.RGBA8888, UrsoAvgGame.SCW, UrsoAvgGame.SCH, false);
 		backFb = new FrameBuffer(Format.RGBA8888, UrsoAvgGame.SCW, UrsoAvgGame.SCH, false);
-
 	}
 	
 	// add a pic layer and sort layer array to keep the right priority
 	public PicLayer addPicLayer(int foreback, String uname){
 		freeLayer(foreback, uname); // free firstly
-		PicLayer pic = new PicLayer(game, 0, uname);
+		PicLayer pic = new PicLayer(g, 0, uname);
 		if (foreback == LAYER_BACK){
 			backLayerMap.put(uname, pic);
 			backLayerArr.add(pic);
@@ -130,30 +131,52 @@ public class LayerCtrl {
 		}
 	}
 
-	public void paint() {
+	TextureRegion tr;
+	public void paint(Viewport vp) {
 		// paint layers on frame buffer
-		foreFb.bind();
+		vp.apply();
+		foreFb.begin();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-		
-		game.batch.begin();
+		g.batch.begin();
 		// paint visible fore layers to fore frame buffer
 		for (UrsoLayer layer : foreLayerArr){
 			if (layer.isPainting()){
 				layer.paint();
 			}
 		}
-		game.batch.end();
-		FrameBuffer.unbind();
-		
+		g.batch.end();
+		foreFb.end();
+		vp.apply();
+
+//		vp.apply();
+//		foreFb.begin();
+//        //Gdx.gl.glViewport(0, 0, vp.getScreenWidth(), vp.getScreenHeight());
+//		Gdx.gl.glClearColor(0, 0, 0, 1);
+//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+//		g.batch.begin();
+//		g.batch.draw(new Texture(Gdx.files.local("data/graphics/bsskpi.png")), 0, 0);
+//		g.batch.end();
+//		foreFb.end();
+//		vp.apply();
+
+//		tr = new TextureRegion(foreFb.getColorBufferTexture());
+//		tr.flip(false,true);
+
 		// paint frame buffer
-		game.batch.begin();
-		game.batch.setColor(1f, 1f, 1f, 1f);
-		game.batch.draw(foreFb.getColorBufferTexture(), 0, 0);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+		g.batch.begin();
+		g.batch.setColor(1f, 1f, 1f, 1f);
+//		g.batch.draw(tr.getTexture(), 0, 0);
+		g.batch.draw(foreFb.getColorBufferTexture(), 0, 0, foreFb.getColorBufferTexture().getWidth(), foreFb.getColorBufferTexture().getHeight(), 0, 0, foreFb.getColorBufferTexture().getWidth(),
+				foreFb.getColorBufferTexture().getHeight(), false, true);
+
 		// draw text test
-		game.font.color(Color.RED);
-		game.font.draw("我测试abc123ASGD哈哈！！", 100, 400);
-		game.batch.end();
+		//g.batch.draw(new Texture(Gdx.files.local("data/graphics/bsskpi.png")), 0, 0);
+		g.font.color(Color.RED);
+		g.font.draw("19、金融同步修改，判断昨天的日期，如果小于10号，则删除上上月数据，同步上上月数据，否则同步上月数据", 100, 400);
+		g.batch.end();
 	}
 
 	public void afterPaint() {
