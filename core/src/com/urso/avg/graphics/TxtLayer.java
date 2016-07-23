@@ -8,6 +8,8 @@ import com.urso.avg.UrsoAvgGame;
  */
 public class TxtLayer extends PicLayer {
     private Rectangle txtRect;
+    private float lineSpace = 2;
+    private boolean nowait = false;
 
     public TxtLayer(UrsoAvgGame g, int uid, String uname) {
         super(g, uid, uname);
@@ -21,5 +23,21 @@ public class TxtLayer extends PicLayer {
 
     public void setTxtRect(Rectangle txtRect) {
         this.txtRect = txtRect;
+    }
+
+    public float getLineSpace() {
+        return lineSpace;
+    }
+
+    public void setLineSpace(float lineSpace) {
+        this.lineSpace = lineSpace;
+    }
+
+    public boolean isNowait() {
+        return nowait;
+    }
+
+    public void setNowait(boolean nowait) {
+        this.nowait = nowait;
     }
 }

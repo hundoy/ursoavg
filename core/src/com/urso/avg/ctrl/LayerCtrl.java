@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.urso.avg.UrsoAvgGame;
 import com.urso.avg.bean.DicBean;
 import com.urso.avg.graphics.PicLayer;
+import com.urso.avg.graphics.TxtLayer;
 import com.urso.avg.graphics.UrsoLayer;
 
 import java.util.HashMap;
@@ -37,6 +38,9 @@ public class LayerCtrl {
 	// store layers via uname
 	private HashMap<String, UrsoLayer> foreLayerMap;
 	private HashMap<String, UrsoLayer> backLayerMap;
+
+    // focus txtlayer for default text
+    private TxtLayer focusTxtLayer;
 	
 	private FrameBuffer foreFb;
 	private FrameBuffer backFb;
@@ -60,15 +64,7 @@ public class LayerCtrl {
 	public PicLayer addPicLayer(int foreback, String uname){
 		freeLayer(foreback, uname); // free firstly
 		PicLayer pic = new PicLayer(g, 0, uname);
-		if (foreback == LAYER_BACK){
-			backLayerMap.put(uname, pic);
-			backLayerArr.add(pic);
-			backLayerArr.sort();
-		} else {
-			foreLayerMap.put(uname, pic);
-			foreLayerArr.add(pic);
-			foreLayerArr.sort();
-		}
+		addLayer(foreback, uname, pic);
 		
 		return pic;
 	}
@@ -198,5 +194,60 @@ public class LayerCtrl {
 			layer.dispose();
 		}
 	}
+
+    // add a text layer
+    public TxtLayer addTxtLayer(int foreback, String uname) {
+        freeLayer(foreback, uname); // free firstly
+        TxtLayer lay = new TxtLayer(g, 0, uname);
+        addLayer(foreback, uname, lay);
+
+        return lay;
+    }
+
+    /*
+	 * set properties with a dictionary ( make it easy to extend )
+	 * [id=uname, x=x_position, y=y_position, rect=x,y,width,height, nw=false(whether nowait, default false), ls=2(line space, default is 2)
+	 * vis=is_visible, opa=255(opacity), prior=2400(priority)
+	 * focus=true(this layer will be the focus text layer)]
+	 */
+    public TxtLayer setTxtLayer(DicBean dic){
+        String uname = dic.get("id");
+        TxtLayer layer = null;
+        if (dic.get("page").equals("back")){
+            layer = (TxtLayer) backLayerMap.get(uname);
+        } else if (foreLayerMap.containsKey(uname)){
+            layer = (TxtLayer) foreLayerMap.get(uname);
+        }
+
+        // set properties
+        if (dic.have("x") && dic.have("y")) layer.setPos(dic.getInt("x"), dic.getInt("y"));
+        if (dic.have("vis")) layer.setVisible(dic.getBool("vis"));
+        if (dic.have("opa")) layer.setOpacity(dic.getFloat("opa"));
+        if (dic.have("prior")) layer.setPriority(dic.getInt("prior"));
+        if (dic.have("rect")) layer.setTxtRect(dic.getRect("rect"));
+        if (dic.have("nw")) layer.setNowait(dic.getBool("nw"));
+        if (dic.have("ls")) layer.setLineSpace(dic.getFloat("ls"));
+        if (dic.have("focus") && dic.getBool("focus")) focusTxtLayer = layer;
+
+        if (dic.get("page").equals("back")){
+            backLayerMap.put(uname, layer);
+        } else{
+            foreLayerMap.put(uname, layer);
+        }
+
+        return layer;
+    }
+
+    private void addLayer(int foreback, String uname, UrsoLayer lay){
+        if (foreback == LAYER_BACK){
+            backLayerMap.put(uname, lay);
+            backLayerArr.add(lay);
+            backLayerArr.sort();
+        } else {
+            foreLayerMap.put(uname, lay);
+            foreLayerArr.add(lay);
+            foreLayerArr.sort();
+        }
+    }
 }
 

@@ -7,6 +7,8 @@
 */
 package com.urso.avg.bean;
 
+import com.badlogic.gdx.math.Rectangle;
+
 import java.util.HashMap;
 
 import static com.urso.avg.tool.ToolUtil.*;
@@ -104,5 +106,16 @@ public class DicBean {
 			return map.containsKey(k.toLowerCase());
 		}
 		return false;
+	}
+
+	public Rectangle getRect(String k) {
+		String str = get(k);
+		if (isnnb(str)){
+			String[] rects = str.split(",");
+			if (rects.length>=4){
+				return new Rectangle(Float.parseFloat(rects[0]), Float.parseFloat(rects[1]), Float.parseFloat(rects[2]), Float.parseFloat(rects[3]));
+			}
+		}
+		return null;
 	}
 }
