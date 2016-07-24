@@ -10,6 +10,7 @@ public class TxtLayer extends PicLayer {
     private Rectangle txtRect;
     private float lineSpace = 2;
     private boolean nowait = false;
+    private float interTime = 0.2f;
 
     public TxtLayer(UrsoAvgGame g, int uid, String uname) {
         super(g, uid, uname);
@@ -40,4 +41,13 @@ public class TxtLayer extends PicLayer {
     public void setNowait(boolean nowait) {
         this.nowait = nowait;
     }
+
+	public float getInterTime() {
+		return interTime;
+	}
+
+	public void setInterTime(float interTime) {
+		this.interTime = interTime;
+	}
+    
 }

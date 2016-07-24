@@ -2,11 +2,12 @@
 * @Title: UrsoAvgGame.java
 * @Description: Entrace of game
 * @author Hundoy - Zohar  
-* @date 2016Äê3ÔÂ26ÈÕ ÏÂÎç7:39:52
+* @date 2016ï¿½ï¿½3ï¿½ï¿½26ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½7:39:52
 * @version V1.0  
 */
 package com.urso.avg;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -30,6 +31,8 @@ public class UrsoAvgGame extends Game {
 	
 	@Override
 	public void create () {
+//		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+		
 		batch = new SpriteBatch();
 		
 		// init font control

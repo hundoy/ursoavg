@@ -41,7 +41,7 @@ public class LayerCtrl {
 
     // focus txtlayer for default text
     private TxtLayer focusTxtLayer;
-	
+    
 	private FrameBuffer foreFb;
 	private FrameBuffer backFb;
 	
@@ -248,6 +248,14 @@ public class LayerCtrl {
             foreLayerArr.add(lay);
             foreLayerArr.sort();
         }
+    }
+    
+    public void showWord(String text, int textIndex) {
+    	
+	}
+    
+    public TxtLayer getFocusLayer(){
+    	return focusTxtLayer;
     }
 }
 

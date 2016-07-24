@@ -3,6 +3,7 @@ package com.koko.core;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.koko.bean.KokoStory;
 import com.urso.avg.UrsoAvgGame;
+import com.urso.avg.graphics.TxtLayer;
 import com.zohar.common.util.FileUtil;
 import org.json.JSONObject;
 
@@ -31,6 +32,9 @@ public class KokoSayer {
     private JSONObject configJson;
 
     private KokoStory curStory;
+    private String curText = "";
+    private int textIndex = 0;
+    private float lastWordTime;
 
     // 0-nowait 1-wait time 2-wait click 3-wait forever
     private int waitType = WAIT_NO;
@@ -57,6 +61,13 @@ public class KokoSayer {
     public void update(){
         if (waitType==WAIT_TIMER && time() - startWaitTime > waitTime){
             goonPlease();
+        }
+        
+        if (curText.length()>0){
+        	TxtLayer tl = game.layer.getFocusLayer();
+        	if (tl!=null && !tl.isNowait() && time()-lastWordTime > tl.getInterTime()){
+        		textIndex++;
+        	}
         }
     }
 
@@ -88,6 +99,7 @@ public class KokoSayer {
     }
 
     private void think() {
+    	
         thinker = new KokoThinker();
         String textErr = thinker.setTextDef(configJson.getString("textDefine"));
         if (isnnb(textErr)) KokoException.warn(KokoExType.NO_DEF_CLASS, textErr);
@@ -111,5 +123,10 @@ public class KokoSayer {
 
     public float time(){
         return TimeUtils.nanoTime()*1.0f/1000000000f;
+    }
+    public void setCurText(String txt){
+    	curText = txt;
+    	textIndex = -1;
+    	lastWordTime = time();
     }
 }

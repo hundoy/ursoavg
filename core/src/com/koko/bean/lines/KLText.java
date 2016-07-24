@@ -12,6 +12,9 @@ public class KLText extends KokoLine {
     public void process(UrsoAvgGame game, KokoPage kpage) {
         // XXX display text...
         System.out.println(oriScript);
-        kpage.nextLine(game);
+        
+        
+        
+        //kpage.nextLine(game);
     }
 }

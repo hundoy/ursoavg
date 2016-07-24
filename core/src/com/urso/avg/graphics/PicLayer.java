@@ -7,6 +7,7 @@
 */
 package com.urso.avg.graphics;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 import com.urso.avg.UrsoAvgGame;
 import com.urso.avg.bean.PicBean;
@@ -36,6 +37,7 @@ public class PicLayer extends UrsoLayer {
 		
 		if (pic!=null){
 			Vector3 vec = getActualPos();
+			Gdx.app.debug("pic pos", vec.toString());
 			pic.getSp().setPosition(vec.x, vec.y);
 			pic.getSp().setAlpha(opacity);
 //			pic.getSp().flip(false, true);
