@@ -22,6 +22,7 @@ import com.urso.avg.graphics.TxtLayer;
 import com.urso.avg.graphics.UrsoLayer;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author zohar
@@ -145,33 +146,20 @@ public class LayerCtrl {
 		foreFb.end();
 		vp.apply();
 
-//		vp.apply();
-//		foreFb.begin();
-//        //Gdx.gl.glViewport(0, 0, vp.getScreenWidth(), vp.getScreenHeight());
-//		Gdx.gl.glClearColor(0, 0, 0, 1);
-//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-//		g.batch.begin();
-//		g.batch.draw(new Texture(Gdx.files.local("data/graphics/bsskpi.png")), 0, 0);
-//		g.batch.end();
-//		foreFb.end();
-//		vp.apply();
-
-//		tr = new TextureRegion(foreFb.getColorBufferTexture());
-//		tr.flip(false,true);
-
 		// paint frame buffer
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		g.batch.begin();
 		g.batch.setColor(1f, 1f, 1f, 1f);
-//		g.batch.draw(tr.getTexture(), 0, 0);
 		g.batch.draw(foreFb.getColorBufferTexture(), 0, 0, foreFb.getColorBufferTexture().getWidth(), foreFb.getColorBufferTexture().getHeight(), 0, 0, foreFb.getColorBufferTexture().getWidth(),
 				foreFb.getColorBufferTexture().getHeight(), false, true);
 
 		// draw text test
-		//g.batch.draw(new Texture(Gdx.files.local("data/graphics/bsskpi.png")), 0, 0);
 		g.font.color(Color.RED);
-		g.font.draw("19、金融同步修改，判断昨天的日期，如果小于10号，则删除上上月数据，同步上上月数据，否则同步上月数据", 100, 400);
+		List<String> sentences = focusTxtLayer.curSentences();
+		for (String sentence: sentences){
+//			g.font.draw(sentence, sx, sy);
+		}
 		g.batch.end();
 	}
 
@@ -249,10 +237,6 @@ public class LayerCtrl {
             foreLayerArr.sort();
         }
     }
-    
-    public void showWord(String text, int textIndex) {
-    	
-	}
     
     public TxtLayer getFocusLayer(){
     	return focusTxtLayer;

@@ -19,6 +19,7 @@ public class FontCtrl {
 	
 	public String configPath;
 	private BitmapFont font;
+	private int initSize;
 	
 	public FontCtrl(UrsoAvgGame game, String path){
 		this.game = game;
@@ -26,6 +27,7 @@ public class FontCtrl {
 	}
 	
 	public BitmapFont loadFont(String name, int size){
+		initSize = size;
 		FreeTypeFontGenerator fontGen = new FreeTypeFontGenerator(Gdx.files.local(configPath+name));
         FreeTypeFontParameter fontPara = new FreeTypeFontParameter();
         fontPara.size = size;
@@ -51,5 +53,13 @@ public class FontCtrl {
 
 	public void color(Color col){
 		font.setColor(col);
+	}
+
+	public void scale(float sx, float sy){
+		font.getData().setScale(sx, sy);
+	}
+
+	public int getInitSize(){
+		return initSize;
 	}
 }

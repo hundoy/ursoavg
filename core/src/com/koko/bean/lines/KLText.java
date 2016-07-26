@@ -9,12 +9,10 @@ import com.urso.avg.UrsoAvgGame;
  */
 public class KLText extends KokoLine {
     @Override
-    public void process(UrsoAvgGame game, KokoPage kpage) {
+    public void process(UrsoAvgGame g, KokoPage kpage) {
         // XXX display text...
         System.out.println(oriScript);
-        
-        
-        
-        //kpage.nextLine(game);
+        g.layer.getFocusLayer().setCurText(oriScript);
+        g.sayer.saySentence();
     }
 }

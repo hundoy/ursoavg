@@ -32,14 +32,13 @@ public class KokoSayer {
     private JSONObject configJson;
 
     private KokoStory curStory;
-    private String curText = "";
-    private int textIndex = 0;
-    private float lastWordTime;
 
     // 0-nowait 1-wait time 2-wait click 3-wait forever
     private int waitType = WAIT_NO;
     private float waitTime = 0;
     private float startWaitTime = 0;
+    private float lastWordTime;
+    private boolean isSaying = false;
 
     public KokoSayer(String configFile){
         String configStr = FileUtil.getStringFromFile(configFile);
@@ -63,10 +62,11 @@ public class KokoSayer {
             goonPlease();
         }
         
-        if (curText.length()>0){
+        if (isSaying){
         	TxtLayer tl = game.layer.getFocusLayer();
         	if (tl!=null && !tl.isNowait() && time()-lastWordTime > tl.getInterTime()){
-        		textIndex++;
+                tl.nextTextIndex();
+                lastWordTime = time();
         	}
         }
     }
@@ -124,9 +124,8 @@ public class KokoSayer {
     public float time(){
         return TimeUtils.nanoTime()*1.0f/1000000000f;
     }
-    public void setCurText(String txt){
-    	curText = txt;
-    	textIndex = -1;
+    public void saySentence(){
     	lastWordTime = time();
+        isSaying = true;
     }
 }

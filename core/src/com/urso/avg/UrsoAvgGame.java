@@ -7,7 +7,6 @@
 */
 package com.urso.avg;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -37,7 +36,7 @@ public class UrsoAvgGame extends Game {
 		
 		// init font control
 		font = new FontCtrl(this, "data/config/");
-		font.loadFont("bgqc.TTF", 18);
+		font.loadFont("bgqc.TTF", 20);
 		
 		// init asset control
 		asset = new AssetCtrl(this, new String[]{"data/graphics/"});
