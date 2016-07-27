@@ -124,6 +124,7 @@ public class KokoSayer {
     public float time(){
         return TimeUtils.nanoTime()*1.0f/1000000000f;
     }
+
     public void saySentence(){
     	lastWordTime = time();
         isSaying = true;

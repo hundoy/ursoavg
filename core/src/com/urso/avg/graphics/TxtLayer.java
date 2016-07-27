@@ -3,9 +3,6 @@ package com.urso.avg.graphics;
 import com.badlogic.gdx.math.Rectangle;
 import com.urso.avg.UrsoAvgGame;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by hundoy on 2016/7/18.
  */
@@ -21,47 +18,12 @@ public class TxtLayer extends PicLayer {
     // ctrl variables
     private String curText = "";
     private int textIndex = 0;
-    private int colNum;
-    private int rowNum;
+    private boolean needDraw = false;
 
     public TxtLayer(UrsoAvgGame g, int uid, String uname) {
         super(g, uid, uname);
 
         priority = uid*1000000;
-    }
-
-    /**
-     * caculate curText's eyescan and breath
-     */
-    private void caculate() {
-        float curSizeX = game.font.getInitSize()*scaleX;
-        float curSizeY = game.font.getInitSize()*scaleY;
-        colNum = (int)Math.floor((txtRect.getWidth()+wordSpace)/(curSizeX+wordSpace));
-        rowNum = (int)Math.floor((txtRect.getHeight()+lineSpace)/(curSizeY+lineSpace));
-    }
-
-    public List<String> curSentences(){
-        List<List<String[]>> sentences = new ArrayList<List<String[]>>();
-        int rowIndex = textIndex/colNum;
-        int colIndex = textIndex%colNum;
-        rowIndex = rowIndex%rowNum;
-        for (int i=0; i<=rowIndex; i++){
-            int jmax = colNum;
-            if (i==rowIndex){
-                jmax = colIndex;
-            }
-            List<String[]> sentence = new ArrayList<String[]>();
-            for (int j=0; j<=jmax; j++){
-            }
-
-
-//            if (i==rowIndex){
-//                sentences.add(curText.substring(i*colNum, textIndex+1));
-//            } else{
-//                sentences.add(curText.substring(i*colNum, i*colNum+colNum));
-//            }
-        }
-        return null;
     }
 
     public Rectangle getTxtRect() {
@@ -103,7 +65,6 @@ public class TxtLayer extends PicLayer {
     public void setCurText(String curText) {
         this.curText = curText;
         setTextIndex(0);
-        caculate();
     }
 
     public int getTextIndex() {
@@ -116,5 +77,9 @@ public class TxtLayer extends PicLayer {
 
     public void nextTextIndex(){
         this.textIndex++;
+    }
+
+    public boolean needDraw() {
+        return needDraw;
     }
 }

@@ -22,7 +22,6 @@ import com.urso.avg.graphics.TxtLayer;
 import com.urso.avg.graphics.UrsoLayer;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * @author zohar
@@ -155,11 +154,11 @@ public class LayerCtrl {
 				foreFb.getColorBufferTexture().getHeight(), false, true);
 
 		// draw text test
-		g.font.color(Color.RED);
-		List<String> sentences = focusTxtLayer.curSentences();
-		for (String sentence: sentences){
-//			g.font.draw(sentence, sx, sy);
+		if (focusTxtLayer!=null && focusTxtLayer.needDraw()){
+			g.font.color(Color.RED);
+			g.font.draw(focusTxtLayer.getX(), focusTxtLayer.getY());
 		}
+
 		g.batch.end();
 	}
 

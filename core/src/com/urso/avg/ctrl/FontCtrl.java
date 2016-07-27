@@ -10,6 +10,7 @@ package com.urso.avg.ctrl;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.urso.avg.UrsoAvgGame;
@@ -20,6 +21,8 @@ public class FontCtrl {
 	public String configPath;
 	private BitmapFont font;
 	private int initSize;
+
+	private GlyphLayout glay = new GlyphLayout();
 	
 	public FontCtrl(UrsoAvgGame game, String path){
 		this.game = game;
@@ -43,12 +46,26 @@ public class FontCtrl {
 		return charTxt;
 	}
 
+	/**
+	 * caculate string 's width and height
+	 * @param str
+	 * @return
+     */
+	private float[] calStrSize(String str){
+		glay.setText(font, str);
+		return new float[]{glay.width, glay.height};
+	}
+
 	public void dispose() {
 		font.dispose();
 	}
 
 	public void draw(String txt, int tx, int ty) {
 		font.draw(game.batch, txt, tx+0f, ty+0f);
+	}
+
+	public void draw(float tx, float ty){
+		font.draw(game.batch, glay, tx, ty);
 	}
 
 	public void color(Color col){
