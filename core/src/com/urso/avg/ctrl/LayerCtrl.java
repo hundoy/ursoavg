@@ -8,7 +8,6 @@
 package com.urso.avg.ctrl;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -154,9 +153,10 @@ public class LayerCtrl {
 				foreFb.getColorBufferTexture().getHeight(), false, true);
 
 		// draw text test
-		if (focusTxtLayer!=null && focusTxtLayer.needDraw()){
-			g.font.color(Color.RED);
-			g.font.draw(focusTxtLayer.getX(), focusTxtLayer.getY());
+		if (focusTxtLayer!=null && focusTxtLayer.isVisible()){
+			focusTxtLayer.draw();
+//			g.font.color(Color.RED);
+//			g.font.draw(focusTxtLayer.getX(), focusTxtLayer.getY());
 		}
 
 		g.batch.end();

@@ -86,7 +86,11 @@ public class KokoSayer {
 
     public void goonPlease(){
         waitType = WAIT_NO;
-        curStory.goon(game);
+        if (isSaying){
+            game.layer.getFocusLayer().afterWait();
+        } else{
+            curStory.goon(game);
+        }
     }
 
     private void say(String storyName) {
@@ -128,5 +132,10 @@ public class KokoSayer {
     public void saySentence(){
     	lastWordTime = time();
         isSaying = true;
+    }
+
+    public void endSaySentence() {
+        isSaying = false;
+        curStory.goon(game);
     }
 }

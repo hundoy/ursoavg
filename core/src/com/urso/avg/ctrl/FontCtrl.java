@@ -51,9 +51,9 @@ public class FontCtrl {
 	 * @param str
 	 * @return
      */
-	private float[] calStrSize(String str){
-		glay.setText(font, str);
-		return new float[]{glay.width, glay.height};
+	public float preDrawText(String str, float targetWidth, int align){
+		glay.setText(font, str, font.getColor(), targetWidth, align, true);
+		return glay.height;
 	}
 
 	public void dispose() {

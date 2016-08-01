@@ -1,6 +1,9 @@
 package com.urso.avg.graphics;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Align;
 import com.urso.avg.UrsoAvgGame;
 
 /**
@@ -17,13 +20,21 @@ public class TxtLayer extends PicLayer {
 
     // ctrl variables
     private String curText = "";
+    private int blockStartIndex = 0;
     private int textIndex = 0;
-    private boolean needDraw = false;
+    private String command = "";
 
     public TxtLayer(UrsoAvgGame g, int uid, String uname) {
         super(g, uid, uname);
-
         priority = uid*1000000;
+    }
+
+    /**
+     * draw text
+     */
+    public void draw() {
+        game.font.color(Color.RED);
+        game.font.draw(getX(), getY());
     }
 
     public Rectangle getTxtRect() {
@@ -64,7 +75,8 @@ public class TxtLayer extends PicLayer {
 
     public void setCurText(String curText) {
         this.curText = curText;
-        setTextIndex(0);
+        textIndex = 0;
+        blockStartIndex = 0;
     }
 
     public int getTextIndex() {
@@ -77,9 +89,49 @@ public class TxtLayer extends PicLayer {
 
     public void nextTextIndex(){
         this.textIndex++;
+
+        if (textIndex>=curText.length()){
+            // reach text end
+            game.sayer.endSaySentence();
+        } else{
+            // check whether get out of region or meet stop command
+            String curWord = "";
+            boolean isCommand = false;
+            char curChar = curText.charAt(textIndex);
+            if (curChar=='\\' && textIndex!=curText.length()-1){
+                textIndex++;
+                curWord = String.valueOf(curChar) + String.valueOf(curText.charAt(textIndex));
+                isCommand = true;
+                command = curWord;
+            } else{
+                curWord = String.valueOf(curChar);
+                command = "";
+            }
+
+            if (isCommand){
+                if (command.equalsIgnoreCase("\\l")){
+                    game.sayer.waitPlease(true);
+                } else if (curWord.equalsIgnoreCase("\\p")){
+                    // next block
+                    blockStartIndex = textIndex+1;
+                }
+            } else{
+                String msg = curText.substring(blockStartIndex, textIndex+1);
+                float preHeight = game.font.preDrawText(msg, txtRect.width, Align.left);
+                Gdx.app.debug("text", msg+" ("+preHeight+")");
+                if (preHeight>txtRect.height){
+                    textIndex--;
+                    game.sayer.waitPlease(true);
+                }
+            }
+        }
     }
 
-    public boolean needDraw() {
-        return needDraw;
+    public void afterWait() {
+        if (command.length()>0){
+
+        }
+
+        nextTextIndex();
     }
 }
