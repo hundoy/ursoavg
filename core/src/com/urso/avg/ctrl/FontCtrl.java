@@ -2,7 +2,7 @@
 * @Title: FontCtrl.java
 * @Description: The class is used to control the font used in game.
 * @author Hundoy - Zohar  
-* @date 2016年3月26日 下午7:39:52
+* @date 2016/3/26
 * @version V1.0  
 */
 package com.urso.avg.ctrl;
@@ -11,8 +11,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.urso.avg.UrsoAvgGame;
 
 public class FontCtrl {
@@ -31,12 +29,16 @@ public class FontCtrl {
 	
 	public BitmapFont loadFont(String name, int size){
 		initSize = size;
-		FreeTypeFontGenerator fontGen = new FreeTypeFontGenerator(Gdx.files.local(configPath+name));
-        FreeTypeFontParameter fontPara = new FreeTypeFontParameter();
-        fontPara.size = size;
-        fontPara.characters = loadCharacters();
-        font = fontGen.generateFont(fontPara);
-        fontGen.dispose();
+//		FreeTypeFontGenerator fontGen = new FreeTypeFontGenerator(Gdx.files.local(configPath+name));
+//        FreeTypeFontParameter fontPara = new FreeTypeFontParameter();
+//        fontPara.size = size;
+//        fontPara.characters = loadCharacters();
+//        font = fontGen.generateFont(fontPara);
+//        fontGen.dispose();
+
+		font = new BitmapFont(Gdx.files.local(configPath+name), false);
+		font.setColor(Color.RED);
+
         return font;
 	}
 

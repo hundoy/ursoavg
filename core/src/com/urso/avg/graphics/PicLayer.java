@@ -27,7 +27,9 @@ public class PicLayer extends UrsoLayer {
 	}
 	
 	public void dispose(){
-		pic.release();
+		if (pic!=null){
+			pic.release();
+		}
 		pic = null;
 	}
 

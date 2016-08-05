@@ -12,7 +12,7 @@ public class KLText extends KokoLine {
     public void process(UrsoAvgGame g, KokoPage kpage) {
         // XXX display text...
         System.out.println(oriScript);
-        g.layer.getFocusLayer().setCurText(oriScript);
+        g.layer.getFocusLayer().addCurText(oriScript);
         g.sayer.saySentence();
     }
 }

@@ -14,7 +14,7 @@ public class TxtLayer extends PicLayer {
     private float wordSpace = 0;
     private float lineSpace = 2;
     private boolean nowait = false;
-    private float interTime = 0.2f;
+    private float interTime = 0.05f;
     private float scaleX = 1f;
     private float scaleY = 1f;
 
@@ -34,7 +34,7 @@ public class TxtLayer extends PicLayer {
      */
     public void draw() {
         game.font.color(Color.RED);
-        game.font.draw(getX(), getY());
+        game.font.draw(txtRect.getX(), txtRect.getY());
     }
 
     public Rectangle getTxtRect() {
@@ -77,6 +77,10 @@ public class TxtLayer extends PicLayer {
         this.curText = curText;
         textIndex = 0;
         blockStartIndex = 0;
+    }
+
+    public void addCurText(String addText){
+        curText += addText;
     }
 
     public int getTextIndex() {

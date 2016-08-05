@@ -62,7 +62,7 @@ public class KokoSayer {
             goonPlease();
         }
         
-        if (isSaying){
+        if (isSaying && waitType==WAIT_NO){
         	TxtLayer tl = game.layer.getFocusLayer();
         	if (tl!=null && !tl.isNowait() && time()-lastWordTime > tl.getInterTime()){
                 tl.nextTextIndex();

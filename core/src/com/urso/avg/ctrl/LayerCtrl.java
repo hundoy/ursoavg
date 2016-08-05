@@ -153,10 +153,10 @@ public class LayerCtrl {
 				foreFb.getColorBufferTexture().getHeight(), false, true);
 
 		// draw text test
+//		g.font.color(Color.RED);
+//		g.font.draw("2、用公钥为数据库配置加密，加密后的内容配置到线上zookeeper节点", 0, 20);
 		if (focusTxtLayer!=null && focusTxtLayer.isVisible()){
 			focusTxtLayer.draw();
-//			g.font.color(Color.RED);
-//			g.font.draw(focusTxtLayer.getX(), focusTxtLayer.getY());
 		}
 
 		g.batch.end();
