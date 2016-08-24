@@ -24,7 +24,7 @@ public class KokoSayer {
     public final static int WAIT_CLICK = 2;
     public final static int WAIT_STH = 3;
 
-    private UrsoAvgGame game;
+//    private UrsoAvgGame game;
     private String scriptPath = "";
     private String startStoryName;
     private KokoThinker thinker;
@@ -51,8 +51,7 @@ public class KokoSayer {
         think();
     }
 
-    public void start(UrsoAvgGame game){
-        this.game = game;
+    public void start(){
         say(startStoryName);
     }
 
@@ -96,7 +95,7 @@ public class KokoSayer {
     private void say(String storyName) {
         if (stories.containsKey(storyName)){
             curStory = stories.get(storyName);
-            curStory.start(game);
+            curStory.start();
         } else{
             KokoException.error(KokoExType.FILE_NOT_FOUND, scriptPath+storyName+".sty");
         }

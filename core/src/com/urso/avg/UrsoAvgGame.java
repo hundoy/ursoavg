@@ -11,14 +11,12 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.koko.core.KokoSayer;
-import com.urso.avg.ctrl.AssetCtrl;
-import com.urso.avg.ctrl.ErrorCtrl;
-import com.urso.avg.ctrl.FontCtrl;
-import com.urso.avg.ctrl.LayerCtrl;
+import com.urso.avg.ctrl.*;
 import com.urso.avg.input.UrsoInpro;
 
 public class UrsoAvgGame extends Game {
 	public SpriteBatch batch;
+	public LogicCtrl logic;
 	public FontCtrl font;
 	public AssetCtrl asset;
 	public ErrorCtrl error;
@@ -46,6 +44,8 @@ public class UrsoAvgGame extends Game {
 		
 		// init layer control
 		layer = new LayerCtrl(this);
+
+		logic = new LogicCtrl(this);
 
 		// init kokosayer
 		sayer = new KokoSayer("data/config/kokoconfig.json");

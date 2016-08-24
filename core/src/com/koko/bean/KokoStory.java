@@ -29,9 +29,9 @@ public class KokoStory extends KokoBaseBean{
         }
     }
 
-    public void start(UrsoAvgGame game) {
+    public void start() {
         index = -1;
-        nextPage(game);
+        nextPage();
     }
 
     public void goon(UrsoAvgGame g){
@@ -42,13 +42,13 @@ public class KokoStory extends KokoBaseBean{
 
     }
 
-    public void nextPage(UrsoAvgGame game) {
+    public void nextPage() {
         index++;
         if (index>pages.size()-1){
             // do nothing, just stop..?
         } else{
             curPage = pages.get(index);
-            curPage.start(game, this);
+            curPage.start();
         }
     }
 }

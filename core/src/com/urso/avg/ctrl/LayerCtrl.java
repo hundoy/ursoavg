@@ -214,6 +214,7 @@ public class LayerCtrl {
         if (dic.have("rect")) layer.setTxtRect(dic.getRect("rect"));
         if (dic.have("nw")) layer.setNowait(dic.getBool("nw"));
         if (dic.have("ls")) layer.setLineSpace(dic.getFloat("ls"));
+        if (dic.have("wi")) layer.setLineSpace(dic.getFloat("wi"));
         if (dic.have("focus") && dic.getBool("focus")) focusTxtLayer = layer;
 
         if (dic.get("page").equals("back")){

@@ -102,36 +102,17 @@ public class AvgScreen implements Screen {
 
 	@Override
 	public void show() {
-//		game.layer.addPicLayer(LayerCtrl.LAYER_FORE, "bg");
-//		game.layer.addPicLayer(LayerCtrl.LAYER_FORE, "mons");
-//		game.layer.setPicLayer(new DicBean("id=bg n=bssit"));
-//		game.layer.setPicLayer(new DicBean("id=mons n=blocks.red x=200 y=100 opa=140"));
-        game.sayer.start(game);
+		game.logic.start();
 	}
 
 	@Override
 	public void render(float delta) {
-		game.sayer.update();
+		game.logic.update();
 		handleInput();
 		camera.update();
 		game.batch.setProjectionMatrix(camera.combined);
 		
 		paint();
-		
-//		time+=delta;
-		
-//		Gdx.gl.glClearColor(0, 0, 0, 1);
-//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-		
-		
-//		switch(state){
-//		case PICTURE:
-//			updatePicture();
-//			break;
-//		case TRANSITIONING:
-//			updateTrans();
-//			break;
-//		}
 	}
 
 	/**
@@ -210,10 +191,6 @@ public class AvgScreen implements Screen {
 
 
 	private void handleInput() {
-//        if (game.sayer.getWaitType()==1 && Gdx.input.justTouched()){
-//            game.sayer.goonPlease();
-//        }
-
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)){
 			currentShader = (currentShader + 1) % shaders.length;
 			game.batch.setShader(shaders[currentShader]);

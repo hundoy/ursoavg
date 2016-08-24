@@ -11,7 +11,6 @@ import com.urso.avg.UrsoAvgGame;
  */
 public class TxtLayer extends PicLayer {
     private Rectangle txtRect;
-    private float wordSpace = 0;
     private float lineSpace = 2;
     private boolean nowait = false;
     private float interTime = 0.05f;

@@ -1,6 +1,5 @@
 package com.koko.bean;
 
-import com.urso.avg.UrsoAvgGame;
 import com.zohar.common.util.ToolUtil;
 
 import java.util.ArrayList;
@@ -33,19 +32,21 @@ public class KokoPage extends KokoBaseBean {
         }
     }
 
-    public void start(UrsoAvgGame game, KokoStory story) {
+    public void start() {
         index = -1;
-        this.story = story;
-        nextLine(game);
+        nextLine();
     }
 
-    public void nextLine(UrsoAvgGame game) {
+    public void nextLine() {
         index++;
         if (index>lines.size()-1){
-            story.nextPage(game);
+            // do nothing
         } else{
             curLine = lines.get(index);
-            curLine.process(game, this);
         }
+    }
+
+    public boolean reachEnd(){
+        return index>lines.size()-1;
     }
 }

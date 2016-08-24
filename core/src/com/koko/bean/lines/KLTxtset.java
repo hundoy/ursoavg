@@ -6,7 +6,7 @@ import com.urso.avg.UrsoAvgGame;
 import com.urso.avg.ctrl.LayerCtrl;
 
 /**
- * Created by Administrator on 2016/7/18.
+ * Created by hundoy on 2016/7/18.
  */
 public class KLTxtset extends KokoLine {
     @Override
