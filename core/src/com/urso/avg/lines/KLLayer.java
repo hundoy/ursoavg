@@ -1,25 +1,26 @@
-package com.koko.bean.lines;
+package com.urso.avg.lines;
 
 import com.koko.bean.KokoLine;
-import com.koko.bean.KokoPage;
 import com.urso.avg.UrsoAvgGame;
 import com.urso.avg.ctrl.LayerCtrl;
 
 /**
- * Created by hundoy on 2016/7/18.
+ * Created by hundoy on 16-5-19.
  */
-public class KLTxtset extends KokoLine {
+public class KLLayer extends KokoLine {
     @Override
-    public void process(UrsoAvgGame g, KokoPage kpage) {
+    protected void analyze() {
+        super.analyze();
+    }
+
+    @Override
+    public void process(UrsoAvgGame g) {
         int page = LayerCtrl.LAYER_FORE;
         if (pdic.get("page").equalsIgnoreCase("back")){
             page = LayerCtrl.LAYER_BACK;
         }
-
-        g.layer.addTxtLayer(page, dp);
+        g.layer.addPicLayer(page, dp);
         pdic.put("id", dp);
-        g.layer.setTxtLayer(pdic);
-
-        kpage.nextLine(g);
+        g.layer.setPicLayer(pdic);
     }
 }

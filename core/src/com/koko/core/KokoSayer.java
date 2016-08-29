@@ -60,7 +60,7 @@ public class KokoSayer {
         if (waitType==WAIT_TIMER && time() - startWaitTime > waitTime){
             goonPlease();
         }
-        
+
         if (isSaying && waitType==WAIT_NO){
         	TxtLayer tl = game.layer.getFocusLayer();
         	if (tl!=null && !tl.isNowait() && time()-lastWordTime > tl.getInterTime()){

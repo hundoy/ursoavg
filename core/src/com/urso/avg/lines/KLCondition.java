@@ -1,4 +1,4 @@
-package com.koko.bean.lines;
+package com.urso.avg.lines;
 
 import com.koko.bean.KokoLine;
 

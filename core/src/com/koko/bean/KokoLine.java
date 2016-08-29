@@ -5,7 +5,6 @@ import com.urso.avg.bean.DicBean;
 import com.zohar.common.util.RegExpUtil;
 import com.zohar.common.util.ToolUtil;
 
-import javax.tools.Tool;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +36,7 @@ public class KokoLine extends KokoBaseBean{
         pdic = new DicBean(kpsStr);
     }
 
-    public void process(UrsoAvgGame game, KokoPage kpage){
+    public void process(UrsoAvgGame game){
 
     }
 }

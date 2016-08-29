@@ -1,9 +1,9 @@
-package com.koko.bean.lines;
+package com.urso.avg.lines;
 
 import com.koko.bean.KokoLine;
 
 /**
  * Created by hundoy on 16-5-19.
  */
-public class KLLoop extends KokoLine {
+public class KLGoto extends KokoLine {
 }
