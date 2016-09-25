@@ -13,7 +13,7 @@ public class KLWait extends KokoLine {
     // wait time(seconds)  [wt 3]
     // wait forever [wt]
     @Override
-    public void process(UrsoAvgGame game, KokoPage kpage) {
+    public void process(UrsoAvgGame game) {
         if (ToolUtil.isNum(dp)){
             // wait specific time
             game.sayer.waitPlease(Float.parseFloat(dp));

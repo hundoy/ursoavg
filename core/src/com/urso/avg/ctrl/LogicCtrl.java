@@ -10,7 +10,7 @@ import com.urso.avg.UrsoAvgGame;
 public class LogicCtrl {
     private UrsoAvgGame g;
 
-    private float waitTime = 0; // if -1, wait forever
+    private float waitTime = 0; // -1, wait forever;  0, no wait;  >0, wait some time
     private float lastTime = 0;
 
     public LogicCtrl(UrsoAvgGame g) {
@@ -22,6 +22,7 @@ public class LogicCtrl {
     }
 
     public void update() {
+        // read lines until meet wait
         while (waitTime==0 || (waitTime >0 && now()>waitTime+lastTime)){
             // wait end, call afterWait function
             waitTime=0;
@@ -29,7 +30,7 @@ public class LogicCtrl {
             line.afterWait(g);
 
             // if line reach end, process next line
-            if (line.reachEnd()){
+            if (line.isReachEnd()){
                 line = g.sayer.nextLine();
                 line.process(g);
             }

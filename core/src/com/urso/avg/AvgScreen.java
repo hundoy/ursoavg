@@ -2,7 +2,7 @@
 * @Title: AvgScreen.java
 * @Description: default screen of avg
 * @author Hundoy - Zohar  
-* @date 2016Äê3ÔÂ26ÈÕ ÏÂÎç10:11:12
+* @date 2016å¹´3æœˆ26æ—¥ ä¸‹åˆ10:11:12
 * @version V1.0  
 */
 package com.urso.avg;

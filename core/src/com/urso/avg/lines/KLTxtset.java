@@ -10,7 +10,7 @@ import com.urso.avg.ctrl.LayerCtrl;
  */
 public class KLTxtset extends KokoLine {
     @Override
-    public void process(UrsoAvgGame g, KokoPage kpage) {
+    public void process(UrsoAvgGame g) {
         int page = LayerCtrl.LAYER_FORE;
         if (pdic.get("page").equalsIgnoreCase("back")){
             page = LayerCtrl.LAYER_BACK;
@@ -20,6 +20,6 @@ public class KLTxtset extends KokoLine {
         pdic.put("id", dp);
         g.layer.setTxtLayer(pdic);
 
-        kpage.nextLine(g);
+//        kpage.nextLine(g);
     }
 }

@@ -46,7 +46,11 @@ public class KokoPage extends KokoBaseBean {
         }
     }
 
-    public boolean reachEnd(){
+    public boolean isReachEnd(){
         return index>lines.size()-1;
+    }
+
+    public KokoLine getCurLine() {
+        return curLine;
     }
 }

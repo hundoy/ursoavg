@@ -1,6 +1,7 @@
 package com.koko.core;
 
 import com.badlogic.gdx.utils.TimeUtils;
+import com.koko.bean.KokoLine;
 import com.koko.bean.KokoStory;
 import com.urso.avg.UrsoAvgGame;
 import com.urso.avg.graphics.TxtLayer;
@@ -136,5 +137,21 @@ public class KokoSayer {
     public void endSaySentence() {
         isSaying = false;
         curStory.goon(game);
+    }
+
+    public KokoLine curLine() {
+        return curStory.getCurPage().getCurLine();
+    }
+
+    public KokoLine nextLine(){
+        curStory.getCurPage().nextLine();
+        while (curStory.getCurPage().isReachEnd()){
+            curStory.nextPage();
+
+            if (curStory.isReachEnd()){
+                return null;
+            }
+        }
+        return curLine();
     }
 }

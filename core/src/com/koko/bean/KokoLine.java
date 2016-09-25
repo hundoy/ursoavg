@@ -39,4 +39,12 @@ public class KokoLine extends KokoBaseBean{
     public void process(UrsoAvgGame game){
 
     }
+
+    public void afterWait(UrsoAvgGame game){
+
+    }
+
+    public boolean isReachEnd(){
+        return false;
+    }
 }

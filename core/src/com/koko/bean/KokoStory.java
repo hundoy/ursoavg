@@ -51,4 +51,13 @@ public class KokoStory extends KokoBaseBean{
             curPage.start();
         }
     }
+
+    public KokoPage getCurPage() {
+        return curPage;
+    }
+
+    public boolean isReachEnd(){
+        return index>pages.size()-1;
+    }
+
 }
