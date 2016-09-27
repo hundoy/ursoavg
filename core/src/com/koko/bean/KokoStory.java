@@ -1,6 +1,5 @@
 package com.koko.bean;
 
-import com.urso.avg.UrsoAvgGame;
 import com.zohar.common.util.RegExpUtil;
 import com.zohar.common.util.ToolUtil;
 
@@ -32,14 +31,6 @@ public class KokoStory extends KokoBaseBean{
     public void start() {
         index = -1;
         nextPage();
-    }
-
-    public void goon(UrsoAvgGame g){
-        curPage.nextLine(g);
-    }
-
-    public void startFrom(String pageLabel){
-
     }
 
     public void nextPage() {

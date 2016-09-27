@@ -20,6 +20,7 @@ public class KokoLine extends KokoBaseBean{
 
     @Override
     protected void analyze() {
+        // common format: [command dp k1=v1 k2=v2 k3=v3...]
         kps = new HashMap<String, String>();
         List<String> rs = RegExpUtil.regFindFirstByAllGroup("\\[(\\S+)(\\s+([^\\]\\s]+))?(\\s+([^\\]]+))*", oriScript);
         if (rs.size()>=1 && !ToolUtil.isNullOrBlank(rs.get(0))) command = rs.get(0);

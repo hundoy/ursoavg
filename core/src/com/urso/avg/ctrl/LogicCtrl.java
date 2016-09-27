@@ -22,7 +22,7 @@ public class LogicCtrl {
     }
 
     public void update() {
-        // read lines until meet wait
+        // core idea: read line by line until meet wait
         while (waitTime==0 || (waitTime >0 && now()>waitTime+lastTime)){
             // wait end, call afterWait function
             waitTime=0;

@@ -3,8 +3,6 @@ package com.koko.core;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.koko.bean.KokoLine;
 import com.koko.bean.KokoStory;
-import com.urso.avg.UrsoAvgGame;
-import com.urso.avg.graphics.TxtLayer;
 import com.zohar.common.util.FileUtil;
 import org.json.JSONObject;
 
@@ -36,9 +34,6 @@ public class KokoSayer {
 
     // 0-nowait 1-wait time 2-wait click 3-wait forever
     private int waitType = WAIT_NO;
-    private float waitTime = 0;
-    private float startWaitTime = 0;
-    private float lastWordTime;
     private boolean isSaying = false;
 
     public KokoSayer(String configFile){
@@ -54,43 +49,6 @@ public class KokoSayer {
 
     public void start(){
         say(startStoryName);
-    }
-
-
-    public void update(){
-        if (waitType==WAIT_TIMER && time() - startWaitTime > waitTime){
-            goonPlease();
-        }
-
-        if (isSaying && waitType==WAIT_NO){
-        	TxtLayer tl = game.layer.getFocusLayer();
-        	if (tl!=null && !tl.isNowait() && time()-lastWordTime > tl.getInterTime()){
-                tl.nextTextIndex();
-                lastWordTime = time();
-        	}
-        }
-    }
-
-    // wait time
-    public void waitPlease(float t){
-        startWaitTime = time();
-        waitTime = t;
-        waitType = WAIT_TIMER;
-    }
-
-    // wait click or forever
-    public void waitPlease(boolean isClick){
-        if (isClick) waitType = WAIT_CLICK;
-        else waitType = WAIT_STH;
-    }
-
-    public void goonPlease(){
-        waitType = WAIT_NO;
-        if (isSaying){
-            game.layer.getFocusLayer().afterWait();
-        } else{
-            curStory.goon(game);
-        }
     }
 
     private void say(String storyName) {
@@ -127,16 +85,6 @@ public class KokoSayer {
 
     public float time(){
         return TimeUtils.nanoTime()*1.0f/1000000000f;
-    }
-
-    public void saySentence(){
-    	lastWordTime = time();
-        isSaying = true;
-    }
-
-    public void endSaySentence() {
-        isSaying = false;
-        curStory.goon(game);
     }
 
     public KokoLine curLine() {
