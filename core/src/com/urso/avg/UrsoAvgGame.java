@@ -34,7 +34,7 @@ public class UrsoAvgGame extends Game {
 		
 		// init font control
 		font = new FontCtrl(this, "data/config/");
-		font.loadFont("youngfont3/yf.fnt", 20);
+		font.loadFont("siyuan/siyuan.fnt", 20);
 		
 		// init asset control
 		asset = new AssetCtrl(this, new String[]{"data/graphics/"});

@@ -1,15 +1,15 @@
 {
 
 "lineDefine": {
- "layer,freelayer,lay,flay,pic": "com.koko.bean.lines.KLLayer",
- "sound": "com.koko.bean.lines.KLSound",
- "goto": "com.koko.bean.lines.KLGoto",
- "loop": "com.koko.bean.lines.KLLoop",
- "condition,if": "com.koko.bean.lines.KLCondition",
- "if": "com.koko.bean.lines.KLCondition",
- "wait,wt": "com.koko.bean.lines.KLWait",
- "txt,txtset": "com.koko.bean.lines.KLTxtset"
+ "layer,freelayer,lay,flay,pic": "com.urso.avg.lines.KLLayer",
+ "sound": "com.urso.avg.lines.KLSound",
+ "goto": "com.urso.avg.lines.KLGoto",
+ "loop": "com.urso.avg.lines.KLLoop",
+ "condition,if": "com.urso.avg.lines.KLCondition",
+ "if": "com.urso.avg.lines.KLCondition",
+ "wait,wt": "com.urso.avg.lines.KLWait",
+ "txt,txtset": "com.urso.avg.lines.KLTxtset"
 }
 
-,"textDefine":"com.koko.bean.lines.KLText"
+,"textDefine":"com.urso.avg.lines.KLText"
 }
