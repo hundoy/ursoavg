@@ -37,6 +37,7 @@ public class KokoLine extends KokoBaseBean{
         pdic = new DicBean(kpsStr);
     }
 
+    // only run once, when read this line
     public void process(UrsoAvgGame game){
 
     }
@@ -46,6 +47,6 @@ public class KokoLine extends KokoBaseBean{
     }
 
     public boolean isReachEnd(){
-        return false;
+        return true;
     }
 }

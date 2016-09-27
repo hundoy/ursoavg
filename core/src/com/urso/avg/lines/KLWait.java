@@ -2,6 +2,7 @@ package com.urso.avg.lines;
 
 import com.koko.bean.KokoLine;
 import com.urso.avg.UrsoAvgGame;
+import com.urso.avg.ctrl.LogicCtrl;
 import com.zohar.common.util.ToolUtil;
 
 /**
@@ -18,10 +19,10 @@ public class KLWait extends KokoLine {
             g.logic.waitTime(Float.parseFloat(dp));
         } else if (dp.equalsIgnoreCase("c") || dp.equalsIgnoreCase("click")){
             // wait click
-            g.logic.waitAction();
+            g.logic.waitAction(LogicCtrl.WAIT_CLICK);
         } else{
             // wait forever
-            g.logic.waitAction();
+            g.logic.waitAction(LogicCtrl.WAIT_FOREVER);
         }
 
     }

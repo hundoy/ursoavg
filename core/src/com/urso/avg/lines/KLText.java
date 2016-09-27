@@ -13,6 +13,11 @@ public class KLText extends KokoLine {
         // XXX display text...
         System.out.println(oriScript);
         g.layer.getFocusLayer().addCurText(oriScript);
-        g.sayer.saySentence();
+        g.logic.say();
+    }
+
+    @Override
+    public void afterWait(UrsoAvgGame g) {
+        g.layer.getFocusLayer().afterWait();
     }
 }

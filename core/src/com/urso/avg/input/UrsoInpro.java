@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.koko.core.KokoSayer;
 import com.urso.avg.UrsoAvgGame;
+import com.urso.avg.ctrl.LogicCtrl;
 
 /**
  * Created by hundoy on 2016/7/7.
@@ -40,8 +41,8 @@ public class UrsoInpro implements InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if (button == Input.Buttons.LEFT && g.sayer.getWaitType()== KokoSayer.WAIT_CLICK){
-            g.sayer.goonPlease();
+        if (button == Input.Buttons.LEFT && g.logic.getWaitTime()== LogicCtrl.WAIT_CLICK){
+            g.logic.stopWait();
         }
         return true;
     }
