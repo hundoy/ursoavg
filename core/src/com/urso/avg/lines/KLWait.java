@@ -1,7 +1,6 @@
 package com.urso.avg.lines;
 
 import com.koko.bean.KokoLine;
-import com.koko.bean.KokoPage;
 import com.urso.avg.UrsoAvgGame;
 import com.zohar.common.util.ToolUtil;
 
@@ -13,17 +12,21 @@ public class KLWait extends KokoLine {
     // wait time(seconds)  [wt 3]
     // wait forever [wt]
     @Override
-    public void process(UrsoAvgGame game) {
+    public void process(UrsoAvgGame g) {
         if (ToolUtil.isNum(dp)){
             // wait specific time
-            game.sayer.waitPlease(Float.parseFloat(dp));
+            g.logic.waitTime(Float.parseFloat(dp));
         } else if (dp.equalsIgnoreCase("c") || dp.equalsIgnoreCase("click")){
             // wait click
-            game.sayer.waitPlease(true);
+            g.logic.waitAction();
         } else{
             // wait forever
-            game.sayer.waitPlease(false);
+            g.logic.waitAction();
         }
 
+    }
+
+    @Override
+    public void afterWait(UrsoAvgGame g) {
     }
 }
