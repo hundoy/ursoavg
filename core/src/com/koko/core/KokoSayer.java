@@ -1,20 +1,22 @@
 package com.koko.core;
 
-import com.badlogic.gdx.utils.TimeUtils;
 import com.koko.bean.KokoLine;
 import com.koko.bean.KokoStory;
+import com.koko.helper.Aktoro;
+import com.koko.helper.Horlogho;
+import com.koko.helper.Muzikisto;
 import com.zohar.common.util.FileUtil;
 import org.json.JSONObject;
 
 import java.util.Map;
 
-import static com.urso.avg.tool.ToolUtil.isnnb;
+import static com.zohar.common.util.ToolUtil.isnob;
 
 /**
  * KokoSayer
  * author: hundoy
  * date: 2016.05.11 16:43:32
- * description:
+ * description: sayer is the only main control of all scenarios.
  */
 public class KokoSayer {
     public final static String EXT_NAME = "sty";
@@ -30,6 +32,11 @@ public class KokoSayer {
     private Map<String, KokoStory> stories;
     private JSONObject configJson;
 
+    // helpers
+    public Aktoro aktoro;
+    public Muzikisto muzikisto;
+    public Horlogho horlogho;
+
     private KokoStory curStory;
 
     // 0-nowait 1-wait time 2-wait click 3-wait forever
@@ -37,8 +44,15 @@ public class KokoSayer {
     private boolean isSaying = false;
 
     public KokoSayer(String configFile){
+        // get json config file
         String configStr = FileUtil.getStringFromFile(configFile);
         configJson = new JSONObject(configStr);
+    }
+
+    public void initHelpers(Aktoro aktoro, Muzikisto muzikisto, Horlogho horlogho){
+        this.aktoro = aktoro;
+        this.muzikisto = muzikisto;
+        this.horlogho = horlogho;
     }
 
     public void init(String scriptPath, String startStoryName){
@@ -48,10 +62,16 @@ public class KokoSayer {
     }
 
     public void start(){
-        say(startStoryName);
+        // check helpers
+        if (aktoro==null || muzikisto==null){
+            KokoException.error(KokoExType.NO_HELPER, "aktoro, muzikisto");
+        }
+
+        // start to tell the first story
+        tell(startStoryName);
     }
 
-    private void say(String storyName) {
+    private void tell(String storyName) {
         if (stories.containsKey(storyName)){
             curStory = stories.get(storyName);
             curStory.start();
@@ -61,30 +81,12 @@ public class KokoSayer {
     }
 
     private void think() {
-    	
-        thinker = new KokoThinker();
+        thinker = new KokoThinker(this);
         String textErr = thinker.setTextDef(configJson.getString("textDefine"));
-        if (isnnb(textErr)) KokoException.warn(KokoExType.NO_DEF_CLASS, textErr);
+        if (isnob(textErr)) KokoException.warn(KokoExType.NO_DEF_CLASS, textErr);
         String err = thinker.setLineDefine(configJson.getJSONObject("lineDefine"));
-        if (isnnb(err)) KokoException.warn(KokoExType.NO_DEF_CLASS, err);
+        if (isnob(err)) KokoException.warn(KokoExType.NO_DEF_CLASS, err);
         stories = thinker.init(scriptPath, EXT_NAME);
-    }
-
-    // getter and setter
-    public String getScriptPath() {
-        return scriptPath;
-    }
-
-    public void setScriptPath(String scriptPath) {
-        this.scriptPath = scriptPath;
-    }
-
-    public int getWaitType() {
-        return waitType;
-    }
-
-    public float time(){
-        return TimeUtils.nanoTime()*1.0f/1000000000f;
     }
 
     public KokoLine curLine() {

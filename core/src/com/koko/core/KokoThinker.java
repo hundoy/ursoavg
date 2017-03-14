@@ -4,8 +4,6 @@ import com.koko.bean.KokoLine;
 import com.koko.bean.KokoStory;
 import com.zohar.common.util.FileUtil;
 import com.zohar.common.util.RegExpUtil;
-import com.zohar.common.util.ToolUtil;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -26,7 +24,18 @@ public class KokoThinker {
     private Map<String, String> scriptMap;
     private Map<String, Class> lineDefMap;
     private Class textDef;
+    private KokoSayer sayer;
 
+    public KokoThinker(KokoSayer sayer){
+        this.sayer = sayer;
+    }
+
+    /**
+     * get all the script files in scriptPath with extName. Generate them into story beans
+     * @param scriptPath
+     * @param extName
+     * @return
+     */
     public Map<String, KokoStory> init(String scriptPath, String extName) {
         getScripts(scriptPath, extName);
 

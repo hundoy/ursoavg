@@ -5,6 +5,7 @@ package com.koko.core;
  */
 public enum KokoExType{
     FILE_NOT_FOUND,
-    NO_DEF_CLASS
+    NO_DEF_CLASS,
+    NO_HELPER
 }
 

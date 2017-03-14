@@ -15,7 +15,7 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.urso.avg.UrsoAvgGame;
-import com.urso.avg.bean.DicBean;
+import com.zohar.common.bean.DicBean;
 import com.urso.avg.graphics.PicLayer;
 import com.urso.avg.graphics.TxtLayer;
 import com.urso.avg.graphics.UrsoLayer;

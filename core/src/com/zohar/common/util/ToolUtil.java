@@ -1,5 +1,6 @@
 package com.zohar.common.util;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,11 +12,13 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Random;
 
-import javax.swing.JFrame;
-
 public class ToolUtil {
 	public static JFrame mainFrame = null;
-	
+
+    public static <T> boolean isnoe(Collection<T> col){
+        return isNullOrEmpty(col);
+    }
+
 	public static <T> boolean isNullOrEmpty(Collection<T> col){
 		if (col==null || col.size()==0){
 			return true;
@@ -23,7 +26,11 @@ public class ToolUtil {
 			return false;
 		}
 	}
-	
+
+    public static boolean isnoe(Object[] arr){
+        return isNullOrEmpty(arr);
+    }
+
 	public static boolean isNullOrEmpty(Object[] arr){
 		if (arr==null || arr.length==0){
 			return true;
@@ -31,7 +38,11 @@ public class ToolUtil {
 			return false;
 		}
 	}
-	
+
+    public static boolean isnob(String str){
+        return isNullOrBlank(str);
+    }
+
 	public static boolean isNullOrBlank(String str){
 		if (str==null || str.trim().length()==0){
 			return true;

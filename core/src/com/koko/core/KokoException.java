@@ -19,6 +19,8 @@ public class KokoException extends RuntimeException {
     public static void error(KokoExType type, String msg){
         if (type.equals(KokoExType.FILE_NOT_FOUND)){
             throw new KokoException(KokoExType.FILE_NOT_FOUND, "cannot find the file "+msg);
+        } else if (type.equals(KokoExType.NO_HELPER)){
+            throw new KokoException(KokoExType.NO_HELPER, "please define helpers firstly "+msg);
         }
     }
 

@@ -5,7 +5,7 @@
 * @date 2016年4月4日 下午8:21:34
 * @version V1.0  
 */
-package com.urso.avg.bean;
+package com.zohar.common.bean;
 
 import com.badlogic.gdx.math.Rectangle;
 

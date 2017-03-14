@@ -1,7 +1,7 @@
 package com.koko.bean;
 
 import com.urso.avg.UrsoAvgGame;
-import com.urso.avg.bean.DicBean;
+import com.zohar.common.bean.DicBean;
 import com.zohar.common.util.RegExpUtil;
 import com.zohar.common.util.ToolUtil;
 
