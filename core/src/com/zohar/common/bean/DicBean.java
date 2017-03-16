@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 import java.util.HashMap;
 
-import static com.urso.avg.tool.ToolUtil.*;
+import static com.zohar.common.util.ToolUtil.*;
 
 /**
  * @author zohar
@@ -25,21 +25,21 @@ public class DicBean {
 	}
 	
 	/**
-	 * @param str
+	 * @param str k1=v1 k2=v2 k3=v3... split with space
 	 */
 	public DicBean(String str) {
 		this();
 		
-		if (isnnb(str)){
+		if (isnob(str)){
 			String[] arr = str.split(" ");
-			if (isnne(arr)){
+			if (isnoe(arr)){
 				for (String arrstr : arr){
 					if (arrstr.indexOf("=")>-1){
 						String[] kv = arrstr.split("=");
-						if (isnne(kv) && kv.length>=2){
+						if (isnoe(kv) && kv.length>=2){
 							String k = kv[0].trim().toLowerCase();
 							String v = kv[1].trim();
-							if (isnnb(k)){
+							if (isnob(k)){
 								map.put(k, v);
 							}
 						}
@@ -50,7 +50,7 @@ public class DicBean {
 	}
 
 	public void put(String k, String v){
-		if (isnnb(k)){
+		if (isnob(k)){
 			String lowk = k.toLowerCase();
 			if (v==null) v = "";
 			map.put(lowk, v);
@@ -66,7 +66,7 @@ public class DicBean {
 	}
 	
 	public String get(String k){
-		if (isnnb(k)){
+		if (isnob(k)){
 			String lowk = k.toLowerCase();
 			if (map.containsKey(lowk)){
 				return map.get(lowk);
@@ -79,7 +79,7 @@ public class DicBean {
 	
 	public int getInt(String k){
 		String str = get(k);
-		if (isnnb(str)){
+		if (isnob(str)){
 			return Integer.valueOf(str);
 		}
 		return 0;
@@ -87,7 +87,7 @@ public class DicBean {
 	
 	public float getFloat(String k){
 		String str = get(k);
-		if (isnnb(str)){
+		if (isnob(str)){
 			return Float.valueOf(str);
 		}
 		return 0;
@@ -95,14 +95,14 @@ public class DicBean {
 	
 	public boolean getBool(String k){
 		String str = get(k);
-		if (isnnb(str)){
+		if (isnob(str)){
 			return str.equalsIgnoreCase("true");
 		}
 		return false;
 	}
 	
 	public boolean have(String k){
-		if (isnnb(k)){
+		if (isnob(k)){
 			return map.containsKey(k.toLowerCase());
 		}
 		return false;
@@ -110,7 +110,7 @@ public class DicBean {
 
 	public Rectangle getRect(String k) {
 		String str = get(k);
-		if (isnnb(str)){
+		if (isnob(str)){
 			String[] rects = str.split(",");
 			if (rects.length>=4){
 				return new Rectangle(Float.parseFloat(rects[0]), Float.parseFloat(rects[1]), Float.parseFloat(rects[2]), Float.parseFloat(rects[3]));

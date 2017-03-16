@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-import static com.zohar.common.util.ToolUtil.isnob;
+import static com.zohar.common.util.ToolUtil.*;
 
 /**
  * KokoSayer
@@ -63,8 +63,8 @@ public class KokoSayer {
 
     public void start(){
         // check helpers
-        if (aktoro==null || muzikisto==null){
-            KokoException.error(KokoExType.NO_HELPER, "aktoro, muzikisto");
+        if (!isnn(aktoro,muzikisto,horlogho)){
+            KokoException.error(KokoExType.NO_HELPER, "aktoro, muzikisto, horlogho");
         }
 
         // start to tell the first story
@@ -103,5 +103,20 @@ public class KokoSayer {
             }
         }
         return curLine();
+    }
+
+
+    // getter and setter
+    public KokoThinker getThinker(){
+        return thinker;
+    }
+    public Aktoro getAktoro(){
+        return aktoro;
+    }
+    public Horlogho getHorlogho(){
+        return horlogho;
+    }
+    public Muzikisto getMuzikisto(){
+        return muzikisto;
     }
 }

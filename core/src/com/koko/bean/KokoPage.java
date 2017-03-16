@@ -22,9 +22,9 @@ public class KokoPage extends KokoBaseBean {
             if (!ToolUtil.isNullOrBlank(lineStr)){
                 lineStr = lineStr.trim();
                 if (!lineStr.startsWith("//")){ // skip comment
-                    KokoLine line = thinker.genLine(lineStr);
+                    KokoLine line = sayer.getThinker().genLine(lineStr);
                     if (line!=null){
-                        line.init(thinker, "", "", lineStr);
+                        line.init(sayer, "", "", lineStr);
                         lines.add(line);
                     }
                 }

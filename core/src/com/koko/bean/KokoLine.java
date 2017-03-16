@@ -1,6 +1,5 @@
 package com.koko.bean;
 
-import com.urso.avg.UrsoAvgGame;
 import com.zohar.common.bean.DicBean;
 import com.zohar.common.util.RegExpUtil;
 import com.zohar.common.util.ToolUtil;
@@ -38,11 +37,11 @@ public class KokoLine extends KokoBaseBean{
     }
 
     // only run once, when read this line
-    public void process(UrsoAvgGame game){
+    public void process(){
 
     }
 
-    public void afterWait(UrsoAvgGame game){
+    public void afterWait(){
 
     }
 

@@ -2,11 +2,10 @@ package com.urso.avg.bean;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 
-import static com.urso.avg.tool.ToolUtil.isnnb;
+import static com.zohar.common.util.ToolUtil.isnob;
 
 /**
  * Created by Hundoy on 2016/6/27.
@@ -48,7 +47,7 @@ public class PicsrcBean {
 
     // create a sprite with atlas name
     public PicBean createPic(String name){
-        if (!isnnb(name)) return createPic();
+        if (!isnob(name)) return createPic();
 
         loadAtlas();
         PicBean pic = new PicBean(this, name);

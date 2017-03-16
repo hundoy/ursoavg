@@ -7,15 +7,15 @@
 */
 package com.urso.avg.ctrl;
 
-import java.util.HashMap;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.urso.avg.UrsoAvgGame;
 import com.urso.avg.bean.PicBean;
 import com.urso.avg.bean.PicsrcBean;
 
-import static com.urso.avg.tool.ToolUtil.*;
+import java.util.HashMap;
+
+import static com.zohar.common.util.ToolUtil.isnoe;
 
 public class AssetCtrl {
 	private UrsoAvgGame game;
@@ -35,11 +35,11 @@ public class AssetCtrl {
 	private void scanFiles() {
 		picsrcMap = new HashMap<String, PicsrcBean>();
 
-		if (isnne(paths)){
+		if (isnoe(paths)){
 			for (String path : paths){
 				if (!path.endsWith("/")) path += "/";
 				FileHandle[] pics = Gdx.files.local(path).list();
-				if (isnne(pics)){
+				if (isnoe(pics)){
 					for (FileHandle fh : pics){
 						String actualname = fh.name();
 						String lowname = actualname.toLowerCase();

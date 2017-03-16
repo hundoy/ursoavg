@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
 import com.urso.avg.UrsoAvgGame;
-import com.urso.avg.ctrl.LogicCtrl;
 
 /**
  * Created by hundoy on 2016/7/18.
@@ -96,7 +95,7 @@ public class TxtLayer extends PicLayer {
 
         if (textIndex>=curText.length()){
             // reach text end
-            game.logic.stopSay();
+//            game.logic.stopSay();
         } else{
             // check whether get out of region or meet stop command
             String curWord = "";
@@ -114,7 +113,7 @@ public class TxtLayer extends PicLayer {
 
             if (isCommand){
                 if (command.equalsIgnoreCase("\\l")){
-                    game.logic.waitAction(LogicCtrl.WAIT_CLICK);
+//                    game.logic.waitAction(LogicCtrl.WAIT_CLICK);
                 } else if (curWord.equalsIgnoreCase("\\p")){
                     // next block
                     blockStartIndex = textIndex+1;
@@ -125,7 +124,7 @@ public class TxtLayer extends PicLayer {
                 Gdx.app.debug("text", msg+" ("+preHeight+")");
                 if (preHeight>txtRect.height){
                     textIndex--;
-                    game.logic.waitAction(LogicCtrl.WAIT_CLICK);
+//                    game.logic.waitAction(LogicCtrl.WAIT_CLICK);
                 }
             }
         }

@@ -22,7 +22,7 @@ public class KokoStory extends KokoBaseBean{
         if (!ToolUtil.isNullOrEmpty(rs)){
             for (List<String> pageInfo: rs){
                 KokoPage page = new KokoPage();
-                page.init(thinker, pageInfo.get(0), pageInfo.get(1), pageInfo.get(2));
+                page.init(sayer, pageInfo.get(0), pageInfo.get(1), pageInfo.get(2));
                 pages.add(page);
             }
         }

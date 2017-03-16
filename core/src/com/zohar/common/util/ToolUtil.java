@@ -15,6 +15,18 @@ import java.util.Random;
 public class ToolUtil {
 	public static JFrame mainFrame = null;
 
+    /**
+     * every argument is not null
+     * @param os
+     * @return
+     */
+    public static boolean isnn(Object... os){
+        for (Object o: os){
+            if (o==null) return false;
+        }
+        return true;
+    }
+
     public static <T> boolean isnoe(Collection<T> col){
         return isNullOrEmpty(col);
     }

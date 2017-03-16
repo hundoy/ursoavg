@@ -1,9 +1,9 @@
-package com.urso.avg.lines;
+package com.koko.lines;
 
 import com.koko.bean.KokoLine;
 
 /**
  * Created by hundoy on 16-5-19.
  */
-public class KLCondition extends KokoLine {
+public class KLSound extends KokoLine {
 }

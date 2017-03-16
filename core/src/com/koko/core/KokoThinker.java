@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.urso.avg.tool.ToolUtil.isnnb;
 import static com.zohar.common.util.ToolUtil.isNullOrEmpty;
+import static com.zohar.common.util.ToolUtil.isnob;
 
 /**
  * KokoThinker
@@ -44,7 +44,7 @@ public class KokoThinker {
             for (String k: scriptMap.keySet()){
                 String script = scriptMap.get(k);
                 KokoStory story = new KokoStory();
-                story.init(this, "sty_"+k, k, script);
+                story.init(sayer, "sty_"+k, k, script);
                 stories.put(k, story);
             }
         }
@@ -86,7 +86,7 @@ public class KokoThinker {
     public KokoLine genLine(String script){
         String type = RegExpUtil.regFindFirstByFirstGroup("\\[(\\S+)", script);
         Class clz = null;
-        if (isnnb(type)){
+        if (isnob(type)){
             // [xxx ]
             clz = lineDefMap.get(type);
         } else {

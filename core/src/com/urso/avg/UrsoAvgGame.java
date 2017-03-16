@@ -45,7 +45,7 @@ public class UrsoAvgGame extends Game {
 		// init layer control
 		layer = new LayerCtrl(this);
 
-		logic = new LogicCtrl(this);
+//		logic = new LogicCtrl(this);
 
 		// init kokosayer
 		sayer = new KokoSayer("data/config/kokoconfig.json");

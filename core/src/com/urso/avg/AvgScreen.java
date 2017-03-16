@@ -102,12 +102,12 @@ public class AvgScreen implements Screen {
 
 	@Override
 	public void show() {
-		game.logic.start();
+//		game.logic.start();
 	}
 
 	@Override
 	public void render(float delta) {
-		game.logic.update();
+//		game.logic.update();
 		handleInput();
 		camera.update();
 		game.batch.setProjectionMatrix(camera.combined);

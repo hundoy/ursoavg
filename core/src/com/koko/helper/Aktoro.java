@@ -12,5 +12,11 @@ public interface Aktoro {
     public void paint(DicBean params);
 
     // paint text
+    // text = [string] a line of text.
     public void talk(DicBean params);
+
+    // text set
+    public void textset(DicBean pdic);
+
+    // say part of word
 }
