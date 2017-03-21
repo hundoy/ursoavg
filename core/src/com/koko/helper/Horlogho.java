@@ -9,7 +9,7 @@ import com.zohar.common.bean.DicBean;
 public interface Horlogho {
 
     // get current seconds
-    public float time();
+    public float nowSec();
 
     // wait action
     // type = [string] time/click/action

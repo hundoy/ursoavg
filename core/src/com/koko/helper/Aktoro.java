@@ -15,8 +15,14 @@ public interface Aktoro {
     // text = [string] a line of text.
     public void talk(DicBean params);
 
+    // talk only one word.
+    public void talkOneWord(String word);
+
     // text set
     public void textset(DicBean pdic);
+
+    // get the focus text layer's defined word interval time(second)
+    public float getWordInterSec();
 
     // say part of word
 }

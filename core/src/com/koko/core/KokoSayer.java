@@ -5,6 +5,7 @@ import com.koko.bean.KokoStory;
 import com.koko.helper.Aktoro;
 import com.koko.helper.Horlogho;
 import com.koko.helper.Muzikisto;
+import com.koko.lines.KLText;
 import com.zohar.common.util.FileUtil;
 import org.json.JSONObject;
 
@@ -41,7 +42,8 @@ public class KokoSayer {
 
     // 0-nowait 1-wait time 2-wait click 3-wait forever
     private int waitType = WAIT_NO;
-    private boolean isSaying = false;
+    private float waitTime = 0;
+    private float startWaitTime = 0;
 
     public KokoSayer(String configFile){
         // get json config file
@@ -93,6 +95,11 @@ public class KokoSayer {
         return curStory.getCurPage().getCurLine();
     }
 
+    // get curline when curline is KLText
+    public KLText curLineText(){
+        return (KLText)curStory.getCurPage().getCurLine();
+    }
+
     public KokoLine nextLine(){
         curStory.getCurPage().nextLine();
         while (curStory.getCurPage().isReachEnd()){
@@ -103,6 +110,30 @@ public class KokoSayer {
             }
         }
         return curLine();
+    }
+
+    public void update(){
+        if (waitType==WAIT_TIMER){
+            if (horlogho.nowSec() > startWaitTime + waitTime){
+                // end of word interval wait
+                curLine().afterWait();
+            }
+        }
+    }
+
+    // wait methods
+    public void waitTime(float time){
+        waitTime = time;
+        startWaitTime = horlogho.nowSec();
+        waitType = WAIT_TIMER;
+    }
+
+    public void waitClick(){
+        waitType = WAIT_CLICK;
+    }
+
+    public void waitAction(){
+        waitType = WAIT_STH;
     }
 
 
