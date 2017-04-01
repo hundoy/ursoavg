@@ -57,7 +57,6 @@ public class KLText extends KokoLine {
             }
         }
 
-
         if (isNormalWord){
             // normal word
             aktoro.talkOneWord(String.valueOf(oriScript.charAt(textIndex)));

@@ -115,9 +115,18 @@ public class KokoSayer {
     public void update(){
         if (waitType==WAIT_TIMER){
             if (horlogho.nowSec() > startWaitTime + waitTime){
+                waitType = WAIT_NO;
                 // end of word interval wait
                 curLine().afterWait();
             }
+        }
+    }
+
+    // when trigger click action, invoke this
+    public void afterClick(){
+        if (waitType==WAIT_CLICK){
+            waitType = WAIT_NO;
+            curLine().afterWait();
         }
     }
 

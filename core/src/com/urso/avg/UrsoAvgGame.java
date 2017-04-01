@@ -12,6 +12,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.koko.core.KokoSayer;
 import com.urso.avg.ctrl.*;
+import com.urso.avg.helper.UrsoActor;
+import com.urso.avg.helper.UrsoClock;
+import com.urso.avg.helper.UrsoMusician;
 import com.urso.avg.input.UrsoInpro;
 
 public class UrsoAvgGame extends Game {
@@ -50,6 +53,10 @@ public class UrsoAvgGame extends Game {
 		// init kokosayer
 		sayer = new KokoSayer("data/config/kokoconfig.json");
 		sayer.init("data/scenario/", "first");
+		UrsoActor actor = new UrsoActor();
+		UrsoClock clock = new UrsoClock();
+		UrsoMusician musician = new UrsoMusician();
+		sayer.initHelpers(actor, musician, clock);
 
 		Gdx.input.setInputProcessor(new UrsoInpro(this));
 
