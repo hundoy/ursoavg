@@ -1,0 +1,55 @@
+
+packtest.png
+size: 1024,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+ainro
+  rotate: false
+  xy: 2, 129
+  size: 200, 125
+  orig: 200, 125
+  offset: 0, 0
+  index: -1
+aro
+  rotate: false
+  xy: 2, 2
+  size: 200, 125
+  orig: 200, 125
+  offset: 0, 0
+  index: -1
+back
+  rotate: false
+  xy: 204, 129
+  size: 200, 125
+  orig: 200, 125
+  offset: 0, 0
+  index: -1
+bro
+  rotate: false
+  xy: 204, 2
+  size: 200, 125
+  orig: 200, 125
+  offset: 0, 0
+  index: -1
+front
+  rotate: false
+  xy: 406, 129
+  size: 200, 125
+  orig: 200, 125
+  offset: 0, 0
+  index: -1
+lisa
+  rotate: false
+  xy: 406, 2
+  size: 200, 125
+  orig: 200, 125
+  offset: 0, 0
+  index: -1
+pm
+  rotate: false
+  xy: 608, 129
+  size: 200, 125
+  orig: 200, 125
+  offset: 0, 0
+  index: -1

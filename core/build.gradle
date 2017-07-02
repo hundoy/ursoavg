@@ -11,4 +11,5 @@ eclipse.project {
 }
 dependencies {
     compile 'org.robovm:robovm-rt:1.12.0'
+    compile 'com.badlogicgames.gdx:gdx-tools:1.9.2'
 }

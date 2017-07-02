@@ -103,6 +103,7 @@ public class AvgScreen implements Screen {
 	@Override
 	public void show() {
 //		game.logic.start();
+		game.sayer.start();
 	}
 
 	@Override

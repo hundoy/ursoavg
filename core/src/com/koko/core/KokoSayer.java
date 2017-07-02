@@ -3,6 +3,7 @@ package com.koko.core;
 import com.koko.bean.KokoLine;
 import com.koko.bean.KokoStory;
 import com.koko.helper.Aktoro;
+import com.koko.helper.Helpo;
 import com.koko.helper.Horlogho;
 import com.koko.helper.Muzikisto;
 import com.koko.lines.KLText;
@@ -51,10 +52,10 @@ public class KokoSayer {
         configJson = new JSONObject(configStr);
     }
 
-    public void initHelpers(Aktoro aktoro, Muzikisto muzikisto, Horlogho horlogho){
-        this.aktoro = aktoro;
-        this.muzikisto = muzikisto;
-        this.horlogho = horlogho;
+    public void initHelpers(Map<String, Helpo> hmap){
+        this.aktoro = (Aktoro) hmap.get("actor");
+        this.muzikisto = (Muzikisto) hmap.get("musician");
+        this.horlogho = (Horlogho) hmap.get("clock");
     }
 
     public void init(String scriptPath, String startStoryName){

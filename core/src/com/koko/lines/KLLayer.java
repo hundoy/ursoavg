@@ -13,13 +13,7 @@ public class KLLayer extends KokoLine {
 
     @Override
     public void process() {
-//        int page = LayerCtrl.LAYER_FORE;
-//        if (pdic.get("page").equalsIgnoreCase("back")){
-//            page = LayerCtrl.LAYER_BACK;
-//        }
-//        g.layer.addPicLayer(page, dp);
         pdic.put("id", dp);
         sayer.getAktoro().paint(pdic);
-//        g.layer.setPicLayer(pdic);
     }
 }

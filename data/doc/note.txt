@@ -1,0 +1,23 @@
+脚本参数：
+
+文字层
+[txt id page=fore/back x=int,x坐标 y=int,y坐标 rect=rect,文字有效区矩形 nw=bool,是否瞬间显示 ls=float,行间距 vis=bool,是否可见 opa=float,不透明度 prior=int,优先级 focus=bool,是否为文字激活层，新显示的文字仅在激活层上]
+
+图片层
+[layer id page=fore/back n=文件名 x=int,x坐标 y=int,y坐标 vis=bool,是否可见 opa=float,不透明度 prior=int,优先级]
+
+等待
+[wt c] 等待点击
+[wt 0.3] 等待多少毫秒
+[wt] 永远等待
+
+逻辑笔记：
+由 LogicCtrl.start 开始
+每帧调用 LogicCtrl.update
+
+KokoLine.process刚开始执行一次
+每次等待事件结束之后，会调用KokoLine.afterWait
+
+KLText.process 把当前行内容加入forcusLayer，调用
+
+

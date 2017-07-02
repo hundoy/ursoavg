@@ -6,7 +6,7 @@ import com.zohar.common.bean.DicBean;
  * Created by hundoy on 2017/3/14.
  * interface about graphics display
  */
-public interface Aktoro {
+public interface Aktoro extends Helpo {
 
     // paint a graphics
     public void paint(DicBean params);

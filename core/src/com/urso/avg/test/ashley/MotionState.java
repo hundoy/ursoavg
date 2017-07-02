@@ -1,0 +1,23 @@
+package com.urso.avg.test.ashley;
+
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.physics.bullet.linearmath.btMotionState;
+
+/**
+ * Created by zohar on 2016/12/4.
+ */
+public class MotionState extends btMotionState {
+    private final Matrix4 transform;
+
+    public MotionState(final Matrix4 transform) {
+        this.transform = transform;
+    }
+    @Override
+    public void getWorldTransform(final Matrix4 worldTrans) {
+        worldTrans.set(transform);
+    }
+    @Override
+    public void setWorldTransform(final Matrix4 worldTrans) {
+        transform.set(worldTrans);
+    }
+}
