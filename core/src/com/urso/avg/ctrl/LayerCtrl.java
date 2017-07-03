@@ -50,6 +50,14 @@ public class LayerCtrl {
 		foreLayerMap = new HashMap<String, UrsoLayer>();
 		foreFb = new FrameBuffer(Format.RGBA8888, UrsoAvgGame.SCW, UrsoAvgGame.SCH, false);
 	}
+
+	public PicLayer getPicLayer(String uname){
+		if (foreLayerMap.containsKey(uname)){
+			return (PicLayer) foreLayerMap.get(uname);
+		} else{
+			return addPicLayer(uname);
+		}
+	}
 	
 	// add a pic layer and sort layer array to keep the right priority
 	public PicLayer addPicLayer(String uname){

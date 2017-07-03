@@ -17,7 +17,7 @@ public class UrsoActor implements Aktoro{
 
     @Override
     public void paint(DicBean params) {
-        PicLayer layer = g.layer.addPicLayer(params.get("id"));
+        PicLayer layer = g.layer.getPicLayer(params.get("id"));
 
     }
 
