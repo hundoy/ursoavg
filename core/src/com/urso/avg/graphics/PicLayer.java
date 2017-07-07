@@ -13,13 +13,15 @@ import com.urso.avg.UrsoAvgGame;
 import com.urso.avg.bean.PicBean;
 
 public class PicLayer extends UrsoLayer {
+	public final static int PRIORITY_RATE = 1000;
+
 	private String picName;
 	private PicBean pic;
 
-	public PicLayer(UrsoAvgGame game, int uid, String uname) {
-		super(game, uid, uname);
+	public PicLayer(UrsoAvgGame game, int priority, String uname) {
+		super(game, uname);
 		
-		priority = uid*1000;
+		this.priority = priority;
 	}
 
 	public void loadPic(String name){

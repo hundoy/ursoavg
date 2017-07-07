@@ -17,8 +17,8 @@ public class UrsoActor implements Aktoro{
 
     @Override
     public void paint(DicBean params) {
-        PicLayer layer = g.layer.getPicLayer(params.get("id"));
-
+        g.layer.addPicLayer(params.get("id"));
+        g.layer.setPicLayer(params);
     }
 
     @Override
@@ -32,8 +32,12 @@ public class UrsoActor implements Aktoro{
     }
 
     @Override
-    public void textset(DicBean pdic) {
-
+    public void textset(DicBean params) {
+        // text layer will be used repeatedly, so remain it and change it instead of freeing it if there is no necessary.
+        if (!g.layer.hasLayer(params.get("id"))){
+            g.layer.addTxtLayer(params.get("id"));
+        }
+        g.layer.setTxtLayer(params);
     }
 
     @Override

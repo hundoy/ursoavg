@@ -22,12 +22,17 @@ import com.urso.avg.graphics.UrsoLayer;
 
 import java.util.HashMap;
 
+import static com.zohar.common.util.ToolUtil.isnoe;
+
 /**
  * @author zohar
  *
  */
 public class LayerCtrl {
-	
+
+	public static final int TYPE_PIC = 1;
+	public static final int TYPE_TEXT = 2;
+
 	private UrsoAvgGame g;
 	
 	// store layers in right order
@@ -51,18 +56,11 @@ public class LayerCtrl {
 		foreFb = new FrameBuffer(Format.RGBA8888, UrsoAvgGame.SCW, UrsoAvgGame.SCH, false);
 	}
 
-	public PicLayer getPicLayer(String uname){
-		if (foreLayerMap.containsKey(uname)){
-			return (PicLayer) foreLayerMap.get(uname);
-		} else{
-			return addPicLayer(uname);
-		}
-	}
-	
 	// add a pic layer and sort layer array to keep the right priority
 	public PicLayer addPicLayer(String uname){
 		freeLayer(uname); // free firstly
-		PicLayer pic = new PicLayer(g, 0, uname);
+		int priority = isnoe(foreLayerArr) ? PicLayer.PRIORITY_RATE : foreLayerArr.get(foreLayerArr.size-1).getPriority() * PicLayer.PRIORITY_RATE;
+		PicLayer pic = new PicLayer(g, priority, uname);
 		addLayer(uname, pic);
 		
 		return pic;
@@ -158,14 +156,54 @@ public class LayerCtrl {
 		}
 	}
 
+	public boolean hasLayer(String uname){
+		return foreLayerMap.containsKey(uname);
+	}
+
     // add a text layer
     public TxtLayer addTxtLayer(String uname) {
         freeLayer(uname); // free firstly
+		int priority = isnoe(foreLayerArr) ? PicLayer.PRIORITY_RATE : foreLayerArr.get(foreLayerArr.size-1).getPriority() * PicLayer.PRIORITY_RATE;
         TxtLayer lay = new TxtLayer(g, 0, uname);
         addLayer(uname, lay);
 
         return lay;
     }
+
+	// get the right priority for new layer
+	public int getPriority(int type){
+        if (type==TYPE_PIC){
+            // for pic layer
+            int priorRate = PicLayer.PRIORITY_RATE;
+            if (isnoe(foreLayerArr)) return priorRate;
+            UrsoLayer ly = foreLayerArr.get(foreLayerArr.size-1);
+            int i = 2;
+            while (ly instanceof TxtLayer && foreLayerArr.size-i>=0){
+                ly = foreLayerArr.get(foreLayerArr.size-i);
+                i++;
+            }
+            if (ly instanceof TxtLayer){
+                return priorRate;
+            } else{
+                return ly.getPriority()+priorRate;
+            }
+        } else{
+            // for text layer
+            int priorRate = TxtLayer.PRIORITY_RATE;
+            if (isnoe(foreLayerArr)) return priorRate;
+            UrsoLayer ly = foreLayerArr.get(foreLayerArr.size-1);
+            int i = 2;
+            while (ly instanceof TxtLayer && foreLayerArr.size-i>=0){
+                ly = foreLayerArr.get(foreLayerArr.size-i);
+                i++;
+            }
+            if (ly instanceof TxtLayer){
+                return priorRate;
+            } else{
+                return ly.getPriority()+priorRate;
+            }
+        }
+	}
 
     /*
 	 * set properties with a dictionary ( make it easy to extend )

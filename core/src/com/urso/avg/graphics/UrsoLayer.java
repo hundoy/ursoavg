@@ -15,7 +15,6 @@ import java.util.HashMap;
 public class UrsoLayer implements Comparable<UrsoLayer> {
 	protected UrsoAvgGame game;
 	
-	protected int uid;
 	protected String uname;
 	protected boolean isVisible = true;
 	protected float opacity = 1f;
@@ -29,14 +28,9 @@ public class UrsoLayer implements Comparable<UrsoLayer> {
 	// temp
 	protected Vector3 tempVec3 = new Vector3();
 	
-	public UrsoLayer(UrsoAvgGame game, int uid){
-		this(game, uid, String.valueOf(uid));
-	}
-
-	public UrsoLayer(UrsoAvgGame game, int uid, String uname){
+	public UrsoLayer(UrsoAvgGame game, String uname){
 		this.game = game;
 		this.uname = uname;
-		this.uid = uid;
 	}
 	
 	public void addChild(UrsoLayer layer){
@@ -80,14 +74,6 @@ public class UrsoLayer implements Comparable<UrsoLayer> {
 	}
 	
 	// getters and setters
-	public int getUid() {
-		return uid;
-	}
-
-	public void setUid(int uid) {
-		this.uid = uid;
-	}
-
 	public String getUname() {
 		return uname;
 	}

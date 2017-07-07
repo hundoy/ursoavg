@@ -10,6 +10,8 @@ import com.urso.avg.UrsoAvgGame;
  * Created by hundoy on 2016/7/18.
  */
 public class TxtLayer extends PicLayer {
+    public final static int PRIORITY_RATE = 1000;
+
     private Rectangle txtRect;
     private float lineSpace = 2;
     private boolean nowait = false;
@@ -23,9 +25,8 @@ public class TxtLayer extends PicLayer {
     private int textIndex = 0;
     private String command = "";
 
-    public TxtLayer(UrsoAvgGame g, int uid, String uname) {
-        super(g, uid, uname);
-        priority = uid*1000000;
+    public TxtLayer(UrsoAvgGame g, int priority, String uname) {
+        super(g, priority, uname);
     }
 
     /**

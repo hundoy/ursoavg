@@ -20,8 +20,6 @@ public class KLText extends KokoLine {
     public void process() {
         // XXX display text...
         System.out.println(oriScript);
-//        g.layer.getFocusLayer().addCurText(oriScript);
-//        g.logic.say();
         textIndex = -1;
         nextWord();
     }
@@ -71,7 +69,6 @@ public class KLText extends KokoLine {
 
     @Override
     public void afterWait() {
-//        g.layer.getFocusLayer().afterWait();
         if (isReachEnd()){
             // reach line end. go next line
             sayer.nextLine();

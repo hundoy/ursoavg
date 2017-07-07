@@ -1,5 +1,7 @@
 package com.zohar.common.util;
 
+import com.badlogic.gdx.utils.Array;
+
 import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +31,14 @@ public class ToolUtil {
 
     public static <T> boolean isnoe(Collection<T> col){
         return isNullOrEmpty(col);
+    }
+
+    public static <T> boolean isnoe(Array<T> col){
+        if (col==null || col.size==0){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 	public static <T> boolean isNullOrEmpty(Collection<T> col){
